@@ -1,0 +1,20 @@
+# Ignore everything
+*
+
+# Include list
+!.gitignore
+!README.md
+!/starship
+!/starship/*
+!/sway/
+!/sway/**
+!/zsh/.zprofile
+!/zsh/.zshrc
+!/mako
+!/mako/*
+!/nvim
+!/nvim/**
+!/kitty
+!/kitty/**
+!/openssl
+!/openssl/legacy.conf
