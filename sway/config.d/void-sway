@@ -1,0 +1,55 @@
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+# 2,3,8,9
+
+output * bg ~/.config/sway/bg/mountains.jpg fill
+output DP-1 enable scale 1.5 position 0,0 mode 5120x2160@59.985001Hz
+output DP-3 enable scale 1.5 position 3413,0 mode 3840x2160@60.000Hz
+output HDMI-A-4 disable scale 1.5 position 0,0 mode 3840x2160@60.000Hz
+
+workspace 1 output DP-1
+workspace 5 output DP-3
+
+exec swaymsg "workspace 1; exec $term"
+exec swaymsg "workspace 5; exec $firefox"
+
+### Idle configuration
+#
+# Example configuration:
+#
+exec swayidle -w \
+         timeout 600 'swaylock -f -c 000000' \
+         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+input type:keyboard {
+    xkb_layout eu,us
+    xkb_model "pc105"
+}
+
