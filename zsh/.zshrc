@@ -5,6 +5,9 @@ SAVEHIST=100000000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+#Include completions from user dir
+fpath=(~/.config/zsh/site-functions $fpath)
+
 # Go stuff
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin

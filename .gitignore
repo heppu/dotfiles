@@ -11,6 +11,8 @@
 !/zsh/
 !/zsh/.zprofile
 !/zsh/.zshrc
+!/zsh/site-functions
+!/zsh/site-functions/*
 !/mako
 !/mako/*
 !/nvim
