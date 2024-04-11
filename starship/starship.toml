@@ -1,0 +1,33 @@
+format = '$all'
+
+[cmd_duration]
+min_time = 500
+format = '[$duration ](bold yellow)'
+
+[directory]
+truncate_to_repo = false
+truncation_length = 12
+truncation_symbol = '…/'
+style = 'cyan'
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+style = 'yellow'
+
+[git_metrics]
+disabled = false
+added_style = 'green'
+deleted_style = 'red'
+format = '([+$added]($added_style))([-$deleted]($deleted_style) )'
+
+[golang]
+disabled = true
+
+[status]
+disabled = false
+
+[kubernetes]
+disabled = false
+
+[line_break]
+disabled = true
