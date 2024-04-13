@@ -200,33 +200,14 @@ bindsym --to-code {
   XF86AudioPlay exec playerctl play-pause
   XF86AudioNext exec playerctl next
   XF86AudioPrev exec playerctl previous
-  # Capture and save entire screen
   Print exec grimshot --notify save
-  # Capture and save selection
   Shift+Print exec grimshot --notify save area
 }
 
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
 
 ### Required services
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dex -a
 exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP=sway
 exec gnome-keyring-daemon --start --components=secrets
+exec_always waybar -c ~/.config/waybar/$(hostname).jsonc
