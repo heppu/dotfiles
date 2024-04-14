@@ -41,7 +41,7 @@ gaps inner 5
 smart_gaps on
 
 # Borders
-default_border pixel 2
+default_border pixel 3
 default_floating_border none
 smart_borders on
 
@@ -204,10 +204,58 @@ bindsym --to-code {
   Shift+Print exec grimshot --notify save area
 }
 
+#
+# Colors
+#
+set $black0 "#191D24"
+set $black1 "#1E222A"
+set $black2 "#222630"
+set $gray0 "#242933"
+set $gray1 "#2E3440"
+set $gray2 "#3B4252"
+set $gray3 "#434C5E"
+set $white_alt "#C0C8D8"
+set $white0 "#BBC3D4"
+set $white1 "#D8DEE9"
+set $white2 "#E5E9F0"
+set $white3 "#ECEFF4"
+set $gray5 "#60728A"
+set $gray4 "#4C566A"
+set $blue0 "#5E81AC"
+set $cyan "#8FBCBB"
+set $red "#BF616A"
+set $orange "#D08770"
+set $yellow "#EBCB8B"
+set $green "#A3BE8C"
+set $magenta "#B48EAD"
+set $blue1 "#81A1C1"
+set $cyan_b "#9FC6C5"
+set $red_b "#C5727A"
+set $orange_b "#D79784"
+set $yellow_b "#EFD49F"
+set $green_b "#B1C89D"
+set $magenta_b "#BE9DB8"
+set $blue2 "#88C0D0"
+set $cyan_d "#80B3B2"
+set $red_d "#B74E58"
+set $orange_d "#CB775D"
+set $yellow_d "#E7C173"
+set $green_d "#97B67C"
+set $magenta_d "#A97EA1"
+
+set $hilight $magenta_b
+
+## Window decoration
+# class                 border  backgr. text    indicator child_border
+client.focused          $hilight #434c5e #eceff4 #8fbcbb   $hilight
+client.focused_inactive $hilight #2e3440 #d8dee9 #4c566a   #4c566a
+client.unfocused        $hilight #2e3440 #d8dee9 #4c566a   #4c566a
+client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
+
 
 ### Required services
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dex -a
 exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP=sway
 exec gnome-keyring-daemon --start --components=secrets
-exec_always waybar -c ~/.config/waybar/$(hostname).jsonc
+exec waybar -c ~/.config/waybar/$(hostname).jsonc
