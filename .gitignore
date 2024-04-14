@@ -23,3 +23,7 @@
 !/openssl/legacy.conf
 !/waybar
 !/waybar/**
+!/mako
+!/mako/**
+!/wofi
+!/wofi/**

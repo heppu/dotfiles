@@ -16,7 +16,7 @@ set $up k
 set $right l
 # Default apps
 set $term kitty
-set $menu wofi --show drun -i | xargs swaymsg exec --
+set $menu wofi -a --show drun -i | xargs swaymsg exec --
 set $chrome chromium
 set $firefox firefox-wayland
 set $editor code-oss --ozone-platform=wayland --enable-features=UseOzonePlatform
