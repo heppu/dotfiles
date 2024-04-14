@@ -18,7 +18,7 @@
     "network"
   ],
   "bluetooth": {
-    "on-click": "rfkill toggle bluetooth",
+    "on-click": "sudo rfkill toggle bluetooth",
     "format": "",
     "format-disabled": "󰂲",
     "format-connected": " {num_connections} connected",
