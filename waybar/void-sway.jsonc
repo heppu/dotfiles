@@ -2,34 +2,37 @@
   "reload_style_on_change": true,
   "height": 25,
   "modules-left": [
-    "sway/workspaces"
+    "sway/workspaces",
+    "sway/mode"
   ],
   "modules-center": [
     "clock"
   ],
   "modules-right": [
-    "pulseaudio",
+    "pulseaudio#out",
+    "pulseaudio#in",
     "bluetooth",
-    "cpu",
-    "memory",
     "temperature",
-    "network"
+    "cpu",
+    "memory"
   ],
   "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "", // an empty format will hide the module
+    "on-click": "sudo rfkill toggle bluetooth",
+    "format": "",
+    "format-disabled": "󰂲",
     "format-connected": " {num_connections} connected",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
   },
   "clock": {
-    "format": "{:%y-%m-%d %h:%m}",
+    "format": "{:%y-%m-%d %H:%m}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "locale": "fi_FI.utf8",
     "calendar": {
       "mode": "year",
       "mode-mon-col": 3,
-      "weeks-pos": "right",
+      "weeks-pos": "left",
       "on-scroll": 1,
       "format": {
         "months": "<span color='#ffead3'><b>{}</b></span>",
@@ -49,13 +52,11 @@
     "format": "{}% ",
     "interval": 1
   },
-  "pulseaudio": {
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
+  "pulseaudio#out": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": " {icon}",
+    "format-muted": " ",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -69,7 +70,15 @@
         ""
       ]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pamixer -t"
+  },
+  "pulseaudio#in": {
+    "format": "{format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "on-click": "pamixer --default-source -t",
+    "on-scroll-up": "pamixer --default-source -i 1",
+    "on-scroll-down": "pamixer --default-source -d 1"
   },
   "temperature": {
     // "thermal-zone": 2,
@@ -77,15 +86,5 @@
     "critical-threshold": 85,
     "format-critical": "{temperatureC}°C ",
     "format": "{temperatureC}°C "
-  },
-  "network": {
-    "format": "{ifname}",
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-    "format-disconnected": "󰖪", //An empty format will hide the module.
-    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-    "tooltip-format-ethernet": "{ifname} ",
-    "tooltip-format-disconnected": "Disconnected"
   }
 }
