@@ -2,7 +2,8 @@
   "reload_style_on_change": true,
   "height": 25,
   "modules-left": [
-    "sway/workspaces"
+    "sway/workspaces",
+    "sway/mode"
   ],
   "modules-center": [
     "clock"
@@ -11,21 +12,22 @@
     "pulseaudio#out",
     "pulseaudio#in",
     "bluetooth",
-    "backlight",
     "temperature",
+    "backlight",
     "battery",
     "network"
   ],
   "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "", // an empty format will hide the module
+    "on-click": "rfkill toggle bluetooth",
+    "format": "",
+    "format-disabled": "󰂲",
     "format-connected": " {num_connections} connected",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
   },
   "clock": {
-    "format": "{:%y-%m-%d %h:%m}",
+    "format": "{:%y-%m-%d %H:%m}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "locale": "fi_FI.utf8",
     "calendar": {
@@ -112,6 +114,7 @@
     "format": "{temperatureC}°C "
   },
   "network": {
+    "on-click": "iwgtk",
     "format": "{ifname}",
     "format-wifi": "{icon}",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
