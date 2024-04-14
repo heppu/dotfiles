@@ -8,10 +8,9 @@
     "clock"
   ],
   "modules-right": [
-    "pulseaudio",
+    "pulseaudio#out",
+    "pulseaudio#in",
     "bluetooth",
-    "cpu",
-    "memory",
     "backlight",
     "temperature",
     "battery",
@@ -28,10 +27,11 @@
   "clock": {
     "format": "{:%y-%m-%d %h:%m}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "locale": "fi_FI.utf8",
     "calendar": {
       "mode": "year",
       "mode-mon-col": 3,
-      "weeks-pos": "right",
+      "weeks-pos": "left",
       "on-scroll": 1,
       "format": {
         "months": "<span color='#ffead3'><b>{}</b></span>",
@@ -42,19 +42,22 @@
       }
     }
   },
-  "cpu": {
-    "format": "{usage}% ",
-    "tooltip": false,
-    "interval": 1
-  },
-  "memory": {
-    "format": "{}% ",
-    "interval": 1
-  },
   "backlight": {
+    "on-scroll-up": "brillo -A 2",
+    "on-scroll-down": "brillo -U 2",
     "format": "{percent}% {icon}",
     "format-icons": [
-      ""
+      "󰛩",
+      "󱩎",
+      "󱩏",
+      "󱩐",
+      "󱩑",
+      "󱩒",
+      "󱩓",
+      "󱩔",
+      "󱩕",
+      "󱩖",
+      "󰛨"
     ]
   },
   "battery": {
@@ -74,13 +77,11 @@
       ""
     ]
   },
-  "pulseaudio": {
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
+  "pulseaudio#out": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": " {icon}",
+    "format-muted": " ",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -94,10 +95,17 @@
         ""
       ]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pamixer -t"
+  },
+  "pulseaudio#in": {
+    "format": "{format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "on-click": "pamixer --default-source -t",
+    "on-scroll-up": "pamixer --default-source -i 1",
+    "on-scroll-down": "pamixer --default-source -d 1"
   },
   "temperature": {
-    // "thermal-zone": 2,
     "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
     "critical-threshold": 85,
     "format-critical": "{temperatureC}°C ",
@@ -105,12 +113,19 @@
   },
   "network": {
     "format": "{ifname}",
-    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-wifi": "{essid} {icon}",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-    "format-disconnected": "󰖪", //An empty format will hide the module.
+    "format-disconnected": "󰤮",
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-wifi": "({signalStrength}%)",
     "tooltip-format-ethernet": "{ifname} ",
-    "tooltip-format-disconnected": "Disconnected"
+    "tooltip-format-disconnected": "Disconnected",
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ]
   }
 }

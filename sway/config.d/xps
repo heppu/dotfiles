@@ -12,9 +12,6 @@
 
 output * bg ~/.config/sway/bg/mountains.jpg fill
 
-# Lock system
-bindsym Mod4+l exec swaylock -f -c 000000
-
 ### Idle configuration
 #
 # Example configuration:
@@ -52,3 +49,7 @@ input type:touchpad {
     tap enabled
     natural_scroll enabled
 }
+
+bindsym XF86MonBrightnessUp exec brillo -A 2 && (echo "$(brillo -G) / 1" | bc > $WOBSOCK)
+bindsym XF86MonBrightnessDown exec brillo -U 2 && (echo "$(brillo -G) / 1" | bc > $WOBSOCK)
+

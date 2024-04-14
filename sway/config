@@ -173,6 +173,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Lock system
+bindsym Mod4+l exec swaylock -f -c 000000
 
 #### App management
 bindsym --to-code {
@@ -192,8 +194,6 @@ bindsym --to-code {
 # Media keys
 #
 bindsym --to-code {
-  XF86MonBrightnessUp exec brillo -A 5 && (echo "$(brillo -G) / 1" | bc > $WOBSOCK)
-  XF86MonBrightnessDown exec brillo -U 5 && (echo "$(brillo -G) / 1" | bc > $WOBSOCK)
   XF86AudioRaiseVolume exec pamixer -ui 5 && pamixer --get-volume > $WOBSOCK
   XF86AudioLowerVolume exec pamixer -ud 5 && pamixer --get-volume > $WOBSOCK
   XF86AudioMute exec pamixer -t && ( pamixer --get-mute && echo 0 > $WOBSOCK) || pamixer --get-volume > $WOBSOCK
