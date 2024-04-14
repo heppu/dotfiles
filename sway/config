@@ -258,4 +258,4 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dex -a
 exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP=sway
 exec gnome-keyring-daemon --start --components=secrets
-exec_always waybar -c ~/.config/waybar/$(hostname).jsonc
+exec waybar -c ~/.config/waybar/$(hostname).jsonc
