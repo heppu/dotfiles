@@ -113,11 +113,11 @@
   },
   "network": {
     "format": "{ifname}",
-    "format-wifi": "{essid} {icon}",
+    "format-wifi": "{icon}",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
     "format-disconnected": "󰤮",
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    "tooltip-format-wifi": "({signalStrength}%)",
+    "tooltip-format-wifi": "({essid} {signalStrength}%)",
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
     "format-icons": [
