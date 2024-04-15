@@ -15,7 +15,8 @@
     "temperature",
     "backlight",
     "battery",
-    "network"
+    "network",
+    "tray"
   ],
   "bluetooth": {
     "on-click": "sudo rfkill toggle bluetooth",
@@ -130,5 +131,9 @@
       "󰤥",
       "󰤨"
     ]
+  },
+  "tray": {
+    "show-passive-items": true,
+    "spacing": 8
   }
 }

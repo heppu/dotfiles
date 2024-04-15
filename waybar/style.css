@@ -47,7 +47,8 @@ window#waybar {
 #network,
 #pulseaudio,
 #bluetooth,
-#temperature {
+#temperature,
+#tray {
     padding: 0 14px;
     margin: 0 0px;
     color: #ffffff;
@@ -57,6 +58,11 @@ window#waybar {
 #memory,
 #network {
     border-right: none;
+}
+
+#tray {
+  border-right: none;
+  border-left: 1px solid #ffffff;
 }
 
 #window,

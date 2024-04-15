@@ -14,7 +14,8 @@
     "bluetooth",
     "temperature",
     "cpu",
-    "memory"
+    "memory",
+    "tray"
   ],
   "bluetooth": {
     "on-click": "sudo rfkill toggle bluetooth",
@@ -86,5 +87,9 @@
     "critical-threshold": 85,
     "format-critical": "{temperatureC}°C ",
     "format": "{temperatureC}°C "
+  },
+  "tray": {
+    "show-passive-items": true,
+    "spacing": 8
   }
 }
