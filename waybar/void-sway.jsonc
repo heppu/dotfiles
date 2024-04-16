@@ -1,5 +1,6 @@
 {
   "reload_style_on_change": true,
+  "position": "bottom",
   "height": 25,
   "modules-left": [
     "sway/workspaces",
