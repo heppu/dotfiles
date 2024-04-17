@@ -1,0 +1,25 @@
+[alias]
+	co = checkout
+	sw = switch
+	rb = rebase
+	cm = commit
+	st = status
+[credential]
+	helper = /usr/libexec/git-core/git-credential-libsecret
+[push]
+	default = current
+[http]
+	postBuffer = 524288000
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	rebase = true
+[pager]
+	branch = false
+[protocol "file"]
+	allow = always
+[init]
+	defaultBranch = main

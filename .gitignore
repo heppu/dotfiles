@@ -27,3 +27,5 @@
 !/mako/**
 !/wofi
 !/wofi/**
+!/git
+!/git/config
