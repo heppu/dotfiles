@@ -50,3 +50,4 @@ autoload bashcompinit
 
 # Aliases
 alias cat='bat -p --theme=base16-256' 
+alias svi='sudo -E vi'
