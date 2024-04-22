@@ -36,6 +36,11 @@ bindkey '^[[1;5D' backward-word    # Ctrl+left arrow
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
+# Bind Ctrl+f to fg command
+function _fg() { echo "fg"; fg; zle reset-prompt; zle redisplay}
+zle -N _fg
+bindkey '^f' _fg 
+
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
