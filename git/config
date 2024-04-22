@@ -4,6 +4,7 @@
 	rb = rebase
 	cm = commit
 	st = status
+  br = branch
 [credential]
 	helper = /usr/libexec/git-core/git-credential-libsecret
 [push]
