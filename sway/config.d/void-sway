@@ -2,13 +2,16 @@
 output * bg ~/.config/sway/bg/mountains.jpg fill
 output DP-1 enable scale 1.5 position 0,0 mode 5120x2160@59.985001Hz
 output DP-3 enable scale 1.5 position 3413,0 mode 3840x2160@60.000Hz
-output HDMI-A-4 enable scale 2 position 0,0 mode 3840x2160@60.000Hz
+output HDMI-A-4 disable scale 2 position 0,0 mode 3840x2160@60.000Hz
 
 workspace 1 output DP-1
 workspace 5 output DP-3
 
 exec swaymsg "workspace 1; exec $term"
 exec swaymsg "workspace 5; exec $firefox"
+
+bindsym $mod+t output DP-1 disable, output DP-3 disable, output HDMI-A-4 enable
+bindsym $mod+Shift+t output DP-1 enable, output DP-3 enable, output HDMI-A-4 disable
 
 ### Idle configuration
 exec swayidle -w \
