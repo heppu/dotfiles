@@ -29,7 +29,7 @@
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
   },
   "clock": {
-    "format": "{:%y-%m-%d %H:%M}",
+    "format": "{:%d-%m-%y %H:%M}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "locale": "fi_FI.utf8",
     "calendar": {
