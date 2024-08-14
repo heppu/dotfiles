@@ -45,9 +45,12 @@ window#waybar {
 #battery,
 #backlight,
 #network,
+#memory,
 #pulseaudio,
 #bluetooth,
 #temperature,
+#idle_inhibitor,
+#custom-xbps,
 #tray {
     padding: 0 14px;
     margin: 0 0px;
@@ -55,7 +58,7 @@ window#waybar {
     border-right: 1px solid #ffffff;
 }
 
-#memory,
+#custom-xbps,
 #network {
     border-right: none;
 }
