@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkgs=$(xbps-install -nuS | awk '{print $1}')
+pkgs=$(xbps-install -nuM | awk '{print $1}')
 pkg_count=$(echo $pkgs | wc -w)
 pkg_list=$(echo $pkgs | sed 's/ /\\r/g')
 
