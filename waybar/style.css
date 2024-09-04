@@ -58,8 +58,7 @@ window#waybar {
     border-right: 1px solid #ffffff;
 }
 
-#custom-xbps,
-#network {
+#custom-xbps {
     border-right: none;
 }
 

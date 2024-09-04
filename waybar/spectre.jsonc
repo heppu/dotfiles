@@ -12,13 +12,29 @@
   "modules-right": [
     "pulseaudio#out",
     "pulseaudio#in",
+    "idle_inhibitor",
     "bluetooth",
     "temperature",
     "backlight",
     "battery",
     "network",
+    "custom/xbps",
     "tray"
   ],
+  "custom/xbps": {
+    "format": "{} ",
+    "return-type": "json",
+    "tooltip": true,
+    "interval": "3600",
+    "exec": "~/.config/waybar/custom/xbps-updates.sh"
+  },
+  "idle_inhibitor": {
+    "format": "{icon} ",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
   "bluetooth": {
     "on-click": "sudo rfkill toggle bluetooth",
     "format": "",
