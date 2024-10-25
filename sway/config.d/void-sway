@@ -1,7 +1,7 @@
 ### Output configuration
 output * bg ~/.config/sway/bg/mountains.jpg fill
 output DP-1 enable scale 1.5 position 0,0 mode 5120x2160@59.985001Hz
-output DP-3 enable scale 1.5 position 3413,0 mode 3840x2160@60.000Hz
+output DP-3 enable scale 1.5 position 3413,0 mode 3840x2160@165.000Hz
 output HDMI-A-4 disable scale 2 position 0,0 mode 3840x2160@60.000Hz
 
 workspace 1 output DP-1
