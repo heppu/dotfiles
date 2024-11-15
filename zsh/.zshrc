@@ -18,12 +18,15 @@ zstyle ':completion:*:mage:*' hash-fast true
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
 
-# Code server
+# User binaries
 export PATH=$HOME/.local/bin:$PATH
 
-autoload -Uz compinit promptinit
+autoload -Uz compinit promptinit bashcompinit select-word-style
 compinit
 promptinit
+bashcompinit
+# Breaks word at slashes
+select-word-style bash
 
 # Allow completion for sudo
 zstyle ':completion::complete:*' gain-privileges 1
@@ -50,8 +53,6 @@ eval "$(starship init zsh)"
 
 # Node version manager
 eval "$(fnm env --use-on-cd)"
-
-autoload bashcompinit
 
 # Aliases
 alias cat='bat -p --theme=base16-256' 
