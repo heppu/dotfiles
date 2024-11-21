@@ -57,3 +57,4 @@ eval "$(fnm env --use-on-cd)"
 # Aliases
 alias cat='bat -p --theme=base16-256' 
 alias svi='sudo -E vi'
+alias kssh='kitten ssh'
