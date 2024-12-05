@@ -25,5 +25,6 @@
 	allow = always
 [init]
 	defaultBranch = main
-[user]
-	name = heppu
+
+# User related settings are configured in ~/.gitconfig and not part of this file
+
