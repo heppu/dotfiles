@@ -19,7 +19,7 @@ set $term kitty
 set $menu wofi -a --show drun -i | xargs swaymsg exec --
 set $chrome chromium
 set $firefox firefox-wayland
-set $editor code --ozone-platform=wayland --enable-features=UseOzonePlatform
+set $editor code-insiders --ozone-platform=wayland --enable-features=UseOzonePlatform
 set $mattermost gtk-launch mattermost-desktop
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
