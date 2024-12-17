@@ -10,8 +10,13 @@
 
 # 2,3,8,9
 output eDP-1 enable scale 1.5 position 0,0 mode 2880x1800@120.001Hz
+output eDP-1 disable scale 1.5 position 0,0 mode 23840x2160@59.997Hz 
 
 output * bg ~/.config/sway/bg/mountains.jpg fill
+
+# Switch screen setup
+bindsym $mod+Shift+d output eDP-1 disable, output DP-3 enable
+bindsym $mod+Shift+s output eDP-1 enable, output DP-3 disable
 
 ### Idle configuration
 #
