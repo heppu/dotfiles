@@ -5,6 +5,12 @@ SAVEHIST=100000000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+# Push cd in stack automatically
+setopt auto_pushd
+
+# Enable extented globbing
+setopt EXTENDED_GLOB
+
 #Include completions from user dir
 fpath=(~/.config/zsh/site-functions $fpath)
 
@@ -47,6 +53,7 @@ bindkey '^f' _fg
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $ZDOTDIR/plugins/dirhistory.plugin.zsh
 
 # Starship prompt
 eval "$(starship init zsh)"
