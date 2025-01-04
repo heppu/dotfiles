@@ -11,6 +11,15 @@ setopt auto_pushd
 # Enable extented globbing
 setopt EXTENDED_GLOB
 
+# Share history between open terminals
+setopt share_history
+
+# Show history search automatically without Ctrl+R
+#zstyle ':autocomplete:*' default-context history-incremental-search-backward
+#zstyle ':autocomplete:history-incremental-search-backward:*' min-input 1
+#source $ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+
 #Include completions from user dir
 fpath=(~/.config/zsh/site-functions $fpath)
 
@@ -42,8 +51,9 @@ bindkey '^[[1;5C' forward-word     # Ctrl+right arrow
 bindkey '^[[1;5D' backward-word    # Ctrl+left arrow
 
 # Scroll history with arrow keys
-bindkey '\e[A' history-beginning-search-backward
-bindkey '\e[B' history-beginning-search-forward
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 
 # Bind Ctrl+f to fg command
 function _fg() { echo "fg"; fg; zle reset-prompt; zle redisplay}
