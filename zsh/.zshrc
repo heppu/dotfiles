@@ -29,6 +29,11 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 zstyle ':completion:*:mage:*' hash-fast true
 
+# Makefile autocomplete
+zstyle ':completion:*:make:*:targets' call-command true
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+
+
 # Node stuff
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
