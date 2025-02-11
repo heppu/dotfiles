@@ -31,3 +31,5 @@
 !/wofi/**
 !/git
 !/git/config
+!/kanshi
+!/kanshi/**

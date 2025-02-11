@@ -33,11 +33,6 @@ zstyle ':completion:*:mage:*' hash-fast true
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
-
-# Node stuff
-export N_PREFIX=$HOME/.n
-export PATH=$N_PREFIX/bin:$PATH
-
 # User binaries
 export PATH=$HOME/.local/bin:$PATH
 
