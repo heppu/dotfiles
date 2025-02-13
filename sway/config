@@ -27,10 +27,6 @@ set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 
-# Include machine specific configs
-include ~/.config/sway/config.d/$(hostname)
-
-
 ### Style
 
 # Fonts
@@ -263,3 +259,7 @@ exec --no-startup-id dex -a
 exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP=sway
 exec gnome-keyring-daemon --start --components=secrets
 exec waybar -c ~/.config/waybar/$(hostname).jsonc
+
+
+# Include machine specific configs
+include ~/.config/sway/config.d/$(hostname)

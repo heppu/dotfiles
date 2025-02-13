@@ -57,5 +57,5 @@ bindsym XF86MonBrightnessDown exec brillo -U 2 && (echo "$(brillo -G) / 1" | bc 
 
 
 # Run kanshi to configure external displays automatically
-exec kanshi -c ~/.config/kanshi/spectre
 exec_always kill -1 $(pidof kanshi)
+exec ~/.config/kanshi/run.sh
