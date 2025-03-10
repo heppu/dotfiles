@@ -14,7 +14,7 @@
 !/zsh/site-functions
 !/zsh/site-functions/*
 !/zsh/plugins
-!/zsh/plugins/*
+!/zsh/plugins/**
 !/mako
 !/mako/*
 !/nvim

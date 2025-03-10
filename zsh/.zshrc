@@ -2,6 +2,8 @@
 HISTFILE=~/.histfile
 HISTSIZE=100000000
 SAVEHIST=100000000
+HISTDUP=erase
+
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
@@ -11,14 +13,26 @@ setopt auto_pushd
 # Enable extented globbing
 setopt EXTENDED_GLOB
 
-# Share history between open terminals
+# History setup
 setopt share_history
+setopt appendhistory
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_save_no_dups
+setopt hist_find_no_dups
 
-# Show history search automatically without Ctrl+R
-#zstyle ':autocomplete:*' default-context history-incremental-search-backward
-#zstyle ':autocomplete:history-incremental-search-backward:*' min-input 1
-#source $ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-
+# Autocomplete setup
+zstyle ':completion::complete:*' gain-privileges 1
+zstyle ':completion:*' matcher-list 'm:{a-z}={A_Za-Z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+zstyle ':fzf-tab:*' switch-group '<' '>'
+# preview directory's content with eza when completing cd
+#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 #Include completions from user dir
 fpath=(~/.config/zsh/site-functions $fpath)
@@ -43,27 +57,26 @@ bashcompinit
 # Breaks word at slashes
 select-word-style bash
 
-# Allow completion for sudo
-zstyle ':completion::complete:*' gain-privileges 1
-
 # Enable Ctrl+arrow key bindings for word jumping
 bindkey '^[[1;5C' forward-word     # Ctrl+right arrow
 bindkey '^[[1;5D' backward-word    # Ctrl+left arrow
 
 # Scroll history with arrow keys
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
 
 # Bind Ctrl+f to fg command
 function _fg() { echo "fg"; fg; zle reset-prompt; zle redisplay}
 zle -N _fg
 bindkey '^f' _fg 
 
+source $ZDOTDIR/plugins/fzf-tab/fzf-tab.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source $ZDOTDIR/plugins/dirhistory.plugin.zsh
+
+# fzf integration
+eval "$(fzf --zsh)"
 
 # Starship prompt
 eval "$(starship init zsh)"
@@ -76,3 +89,4 @@ alias g='git'
 alias cat='bat -p --theme=base16-256' 
 alias svi='sudo -E vi'
 alias kssh='kitten ssh'
+alias ls+'ls --color'
