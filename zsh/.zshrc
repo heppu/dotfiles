@@ -86,6 +86,7 @@ eval "$(fnm env --use-on-cd)"
 
 # Aliases
 alias g='git'
+alias k='kubectl'
 alias cat='bat -p --theme=base16-256' 
 alias svi='sudo -E vi'
 alias kssh='kitten ssh'
