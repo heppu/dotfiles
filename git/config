@@ -12,6 +12,7 @@
 	cam = commit -am
 	caa = commit -a --amend --no-edit
   nb = checkout -b
+  wd = diff --word-diff-regex=.
 [credential]
 	helper = /usr/libexec/git-core/git-credential-libsecret
 [push]
