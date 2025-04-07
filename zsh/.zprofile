@@ -9,5 +9,6 @@ if [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
     export _JAVA_AWT_WM_NONREPARENTING=1
     export XDG_SCREENSHOTS_DIR=$HOME/Pictures/Screenshots
     export XDG_CURRENT_DESKTOP=sway
+    export XDG_CONFIG_HOME=$HOME/.config
     exec dbus-run-session sway
 fi
