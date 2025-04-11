@@ -35,3 +35,12 @@
 !/kanshi/**
 !/wezterm
 !/wezterm/*
+!/glzr
+!/glzr/glazewm
+!/glzr/glazewm/config.yaml
+!/glzr/zebar
+!/glzr/zebar/starter
+!/glzr/zebar/starter/with-glazewm.zebar.json
+!/glzr/zebar/starter/with-glazewm.html
+!/glzr/zebar/starter/styles.css
+!/glzr/zebar/settings.json
