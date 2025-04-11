@@ -33,3 +33,5 @@
 !/git/config
 !/kanshi
 !/kanshi/**
+!/wezterm
+!/wezterm/*
