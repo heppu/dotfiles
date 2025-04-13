@@ -4,15 +4,15 @@
 	rb = rebase
 	cm = commit
 	st = status
-  br = branch
-  cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|main' | xargs -n 1 -r git branch -d"
-  pp = "!git pull && git fetch --all --prune && git cleanup"
-  p = push
-  fp = push --force
+	br = branch
+	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|main' | xargs -n 1 -r git branch -d"
+	pp = "!git pull && git fetch --all --prune && git cleanup"
+	p = push
+	fp = push --force
 	cam = commit -am
 	caa = commit -a --amend --no-edit
-  nb = checkout -b
-  wd = diff --word-diff-regex=.
+	nb = checkout -b
+	wd = diff --word-diff-regex=.
 [credential]
 	helper = /usr/libexec/git-core/git-credential-libsecret
 [push]
@@ -34,4 +34,3 @@
 	defaultBranch = main
 
 # User related settings are configured in ~/.gitconfig and not part of this file
-
