@@ -72,7 +72,7 @@ window_effects:
     corner_style:
       enabled: true
       # Allowed values: 'square', 'rounded', 'small_rounded'.
-      style: "square"
+      style: "rounded"
 
     # Change the transparency of the window.
     transparency:
@@ -90,7 +90,7 @@ window_effects:
       enabled: false
     corner_style:
       enabled: true
-      style: "square"
+      style: "rounded"
     transparency:
       enabled: false
       opacity: "0%"
@@ -109,7 +109,7 @@ window_behavior:
       centered: true
 
       # Whether to show floating windows as always on top.
-      shown_on_top: false
+      shown_on_top: true
 
     fullscreen:
       # Maximize the window if possible. If the window doesn't have a
@@ -147,6 +147,12 @@ window_rules:
         window_title: { regex: ".*? - Peek" }
       - window_process: { equals: "Lively" }
         window_class: { regex: "HwndWrapper" }
+
+  - commands: ["set-floating"]
+    match:
+      # Command palette.
+      - window_process: { equals: "Microsoft" }
+        window_class: { regex: "WinUIDesktopWin32WindowClass" }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
