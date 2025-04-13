@@ -1,13 +1,26 @@
 # Dotfiles
 
-My dotfiles for various programs in wayland environment.
+My dotfiles for various programs in wayland environment and in Win11.
 
 ## Installation
 
-To backup old configs and install new ones run the following command:
+Backup old configs and install new ones by running:
 ```sh
-mv .config old_config && git clone https://github.com/heppu/dotfiles.git .config
+mv ~/.config ~/old_config
+git clone https://github.com/heppu/dotfiles.git ~/.config
+```
+### ZSH
+
+To make zsh use .config dir run:
+```sh
 echo "ZDOTDIR=~/.config/zsh" >> ~/.zshenv
+```
+
+### PowerShell
+
+To make powershell use .config dir run:
+```powershell
+New-Item -Path ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1 -ItemType SymbolicLink -Value $HOME\.config\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 ```
 
 ## Adding new configs

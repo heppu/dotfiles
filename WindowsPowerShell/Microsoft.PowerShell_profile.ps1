@@ -1,11 +1,17 @@
-# posh stuff
-oh-my-posh init pwsh | Invoke-Expression
-Import-Module posh-git
+# ENV config
+$ENV:XDG_CONFIG_HOME = "$HOME/.config"
+$ENV:STARSHIP_CONFIG = "$HOME/.config/starship/starship.toml"
+
+# Starship stuff
+Invoke-Expression (&starship init powershell)
 
 # Alias
 New-Alias g git
 New-Alias vi nvim
 New-Alias vim nvim
+
+# Start vscode on ALT+C
+Set-PSReadlineKeyHandler -Key alt+c -ScriptBlock { code-insiders . }
 
 # Exit on CTRL+D
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
