@@ -18,7 +18,7 @@ Set-PSReadLineOption -EditMode Windows
 Invoke-Expression (&starship init powershell)
 
 # Alias
-Set-Alias cat 'bat -p --theme=base16-256'
+Set-Alias cat bat
 New-Alias g git
 New-Alias vi nvim
 New-Alias vim nvim
