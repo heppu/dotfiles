@@ -7,7 +7,8 @@ My dotfiles for various programs in wayland environment and in Win11.
 Backup old configs and install new ones by running:
 ```sh
 mv ~/.config ~/old_config
-git clone https://github.com/heppu/dotfiles.git ~/.config
+cd $HOME
+git clone https://github.com/heppu/dotfiles.git .config
 ```
 ### ZSH
 
