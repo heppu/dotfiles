@@ -1,6 +1,7 @@
 # ENV config
 $ENV:XDG_CONFIG_HOME = "$HOME/.config"
 $ENV:STARSHIP_CONFIG = "$HOME/.config/starship/starship.toml"
+$ENV:BAT_CONFIG_DIR = "$HOME/.config/bat"
 $ENV:EDITOR = "nvim"
 
 # git autocomplete
@@ -17,6 +18,7 @@ Set-PSReadLineOption -EditMode Windows
 Invoke-Expression (&starship init powershell)
 
 # Alias
+Set-Alias cat 'bat -p --theme=base16-256'
 New-Alias g git
 New-Alias vi nvim
 New-Alias vim nvim

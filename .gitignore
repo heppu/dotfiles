@@ -45,3 +45,5 @@
 !/zebar/starter/styles.css
 !/WindowsPowerShell
 !/WindowsPowerShell/Microsoft.PowerShell_profile.ps1
+!/bat
+!/bat/**
