@@ -2,6 +2,9 @@
 $ENV:XDG_CONFIG_HOME = "$HOME/.config"
 $ENV:STARSHIP_CONFIG = "$HOME/.config/starship/starship.toml"
 
+# git autocomplete
+Import-Module posh-git
+
 # Starship stuff
 Invoke-Expression (&starship init powershell)
 
