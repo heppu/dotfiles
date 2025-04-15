@@ -1,9 +1,17 @@
 # ENV config
 $ENV:XDG_CONFIG_HOME = "$HOME/.config"
 $ENV:STARSHIP_CONFIG = "$HOME/.config/starship/starship.toml"
+$ENV:EDITOR = "nvim"
 
 # git autocomplete
 Import-Module posh-git
+
+# Autocomplete stuff
+Import-Module -Name PSReadLine
+Import-Module -Name CompletionPredictor
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -EditMode Windows
 
 # Starship stuff
 Invoke-Expression (&starship init powershell)
