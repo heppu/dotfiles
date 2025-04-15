@@ -13,6 +13,7 @@
 	caa = commit -a --amend --no-edit
 	nb = checkout -b
 	wd = diff --word-diff-regex=.
+	rhh	= reset --hard HEAD
 [credential]
 	helper = /usr/libexec/git-core/git-credential-libsecret
 [push]
