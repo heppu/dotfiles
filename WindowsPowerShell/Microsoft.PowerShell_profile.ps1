@@ -2,6 +2,7 @@
 $ENV:XDG_CONFIG_HOME = "$HOME/.config"
 $ENV:STARSHIP_CONFIG = "$HOME/.config/starship/starship.toml"
 $ENV:BAT_CONFIG_DIR = "$HOME/.config/bat"
+$ENV:RIPGREP_CONFIG_PATH = "$HOME/.config/ripgrep/ripgreprc"
 $ENV:EDITOR = "nvim"
 
 # git autocomplete

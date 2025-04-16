@@ -47,3 +47,5 @@
 !/WindowsPowerShell/Microsoft.PowerShell_profile.ps1
 !/bat
 !/bat/**
+!/ripgrep
+!/ripgrep/**

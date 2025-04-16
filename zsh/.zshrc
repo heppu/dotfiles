@@ -37,8 +37,9 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 #Include completions from user dir
 fpath=(~/.config/zsh/site-functions $fpath)
 
-# Bat config
+# Config files
 export BAT_CONFIG_DIR=$HOME/.config/bat
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
 
 # Go stuff
 export GOPATH=$HOME/go
@@ -71,7 +72,7 @@ bindkey '^[[B' history-search-forward
 # Bind Ctrl+f to fg command
 function _fg() { echo "fg"; fg; zle reset-prompt; zle redisplay}
 zle -N _fg
-bindkey '^f' _fg 
+bindkey '^f' _fg
 
 source $ZDOTDIR/plugins/fzf-tab/fzf-tab.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
