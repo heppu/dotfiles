@@ -155,6 +155,15 @@ window_rules:
       # Command palette.
       - window_process: { equals: "Microsoft" }
         window_class: { regex: "WinUIDesktopWin32WindowClass" }
+      - window_process: { equals: "SSMS" }
+        window_title: { equals: "Connect (Preview)" }
+
+  - commands: ["set-tiling"]
+    match:
+      # Command palette.
+      - window_process: { equals: "SSMS" }
+        window_title:
+          { equals: "Microsoft SQL Server Management Studio Preview" }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
