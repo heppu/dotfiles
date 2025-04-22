@@ -4,7 +4,7 @@ profile solo {
 
 profile work-1 {
   output eDP-1 enable scale 1.5 position 320,1440 mode 2880x1800@120.000Hz
-  output "Lenovo Group Limited P32p-30 V30CCGMM" enable scale 1.5 position 0,0 mode 3840x2160@59.997Hz
+  output "Lenovo Group Limited P32p-30 V30CCGMC" enable scale 1.5 position 0,0 mode 3840x2160@59.997Hz
 }
 
 profile work-2 {
