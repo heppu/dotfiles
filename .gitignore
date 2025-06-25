@@ -49,3 +49,5 @@
 !/bat/**
 !/ripgrep
 !/ripgrep/**
+!/ps1
+!/ps1/**
