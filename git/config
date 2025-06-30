@@ -33,5 +33,12 @@
 	allow = always
 [init]
 	defaultBranch = main
+[merge]
+	tool = nvimdiff
+[mergetool]
+	keepBackup = false
+	prompt = false
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
 
 # User related settings are configured in ~/.gitconfig and not part of this file
