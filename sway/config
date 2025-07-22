@@ -131,9 +131,9 @@ focus_follows_mouse no
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    # bindsym $mod+s layout stacking
+    # bindsym $mod+w layout tabbed
+    # bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+shift+f fullscreen
@@ -190,8 +190,8 @@ bindsym Mod4+l exec swaylock -f -c 000000
 bindsym --to-code {
     #$mod+b exec rofi-bluetooth
     $mod+d exec $menu
-    $mod+Return exec $term
-    $mod+Shift+Return exec $term $(~/.config/sway/swaycwd)
+    $mod+n exec $term
+    $mod+Shift+n exec $term $(~/.config/sway/swaycwd)
     $mod+g exec $chrome
     $mod+f exec $firefox
     $mod+c exec $editor $(~/.config/sway/swaycwd)
