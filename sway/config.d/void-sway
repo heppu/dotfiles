@@ -6,22 +6,22 @@ set $lenovo_mini = "Lenovo Group Limited M14t V306DHV8"
 
 output * bg ~/.config/sway/bg/mountains.jpg fill
 
-output "DENON, Ltd. DENON-AVR 0x01010101" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
-output "Lenovo Group Limited M14t V306DHV8" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
+# output "DENON, Ltd. DENON-AVR 0x01010101" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
+# output "Lenovo Group Limited M14t V306DHV8" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
 
 output "Dell Inc. DELL U4021QW DD6WB23" enable scale 1.5 position 0,0 mode 5120x2160@59.985001Hz
-output "Samsung Electric Company Odyssey G7 HNBW300412" enable scale 1.5 position 3413,0 mode 3840x2160@60.000Hz
+# output "Samsung Electric Company Odyssey G7 HNBW300412" enable scale 1.5 position 3413,0 mode 3840x2160@60.000Hz
 
 workspace 1 output "Dell Inc. DELL U4021QW DD6WB23"
-workspace 5 output "Samsung Electric Company Odyssey G7 HNBW300412"
+# workspace 5 output "Samsung Electric Company Odyssey G7 HNBW300412"
 
 exec swaymsg "workspace 1; exec $term"
 exec swaymsg "workspace 3; exec $firefox"
 
 # Keybindings for different monitor configurations
-bindsym $mod+Shift+t output "Dell Inc. DELL U4021QW DD6WB23" disable, output "Samsung Electric Company Odyssey G7 HNBW300412" disable, output "DENON, Ltd. DENON-AVR 0x01010101" enable, output "Lenovo Group Limited M14t V306DHV8" enable
-bindsym $mod+Shift+d output "Dell Inc. DELL U4021QW DD6WB23" enable, output "Samsung Electric Company Odyssey G7 HNBW300412" enable, output "DENON, Ltd. DENON-AVR 0x01010101" disable, output "Lenovo Group Limited M14t V306DHV8" disable
-bindsym $mod+Shift+s output "Dell Inc. DELL U4021QW DD6WB23" enable, output "Samsung Electric Company Odyssey G7 HNBW300412" disable, output "DENON, Ltd. DENON-AVR 0x01010101" disable, output "Lenovo Group Limited M14t V306DHV8" disable
+# bindsym $mod+Shift+t output "Dell Inc. DELL U4021QW DD6WB23" disable, output "Samsung Electric Company Odyssey G7 HNBW300412" disable, output "DENON, Ltd. DENON-AVR 0x01010101" enable, output "Lenovo Group Limited M14t V306DHV8" enable
+# bindsym $mod+Shift+d output "Dell Inc. DELL U4021QW DD6WB23" enable, output "Samsung Electric Company Odyssey G7 HNBW300412" enable, output "DENON, Ltd. DENON-AVR 0x01010101" disable, output "Lenovo Group Limited M14t V306DHV8" disable
+# bindsym $mod+Shift+s output "Dell Inc. DELL U4021QW DD6WB23" enable, output "Samsung Electric Company Odyssey G7 HNBW300412" disable, output "DENON, Ltd. DENON-AVR 0x01010101" disable, output "Lenovo Group Limited M14t V306DHV8" disable
 
 # KVM toggle
 bindsym $mod+Shift+s exec curl -X POST -d '{"id":0,"method":"Switch.Set","params":{"id":0,"on":true}}' 'http://kvm.heppu.io/rpc'
