@@ -3,6 +3,7 @@
 
 # Include list
 !.gitignore
+!.editorconfig
 !README.md
 !/starship
 !/starship/*
