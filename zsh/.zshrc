@@ -88,10 +88,6 @@ eval "$(starship init zsh)"
 # Node version manager
 eval "$(fnm env --use-on-cd)"
 
-# zoxide autocomplete
-export _ZO_MAXAGE=100000
-eval "$(zoxide init zsh)"
-
 # Aliases
 alias g='git'
 alias k='kubectl'
