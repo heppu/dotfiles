@@ -162,8 +162,7 @@ window_rules:
     match:
       # Command palette.
       - window_process: { equals: "SSMS" }
-        window_title:
-          { equals: "Microsoft SQL Server Management Studio Preview" }
+        window_title: { equals: "Microsoft SQL Server Management Studio" }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
