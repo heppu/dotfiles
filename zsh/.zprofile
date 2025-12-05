@@ -10,7 +10,5 @@ if [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
     export XDG_SCREENSHOTS_DIR=$HOME/Pictures/Screenshots
     export XDG_CURRENT_DESKTOP=sway
     export XDG_CONFIG_HOME=$HOME/.config
-    export WLR_NO_HARDWARE_CURSORS=1
-    export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
-    exec dbus-run-session sway --unsupported-gpu
+    exec dbus-run-session sway
 fi
