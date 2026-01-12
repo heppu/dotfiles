@@ -1,0 +1,48 @@
+### Output configuration
+set $samsung_dp = "Samsung Electric Company Odyssey G7 HNBW300412"
+set $dell = "Dell Inc. DELL U4021QW DD6WB23"
+set $dell32 = "Dell Inc. DELL U3219Q 87LK413"
+set $projector = "DENON, Ltd. DENON-AVR 0x01010101"
+set $lenovo_mini = "Lenovo Group Limited M14t V306DHV8"
+
+output * bg ~/.config/sway/bg/mountains.jpg fill
+
+# output "DENON, Ltd. DENON-AVR 0x01010101" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
+# output "Lenovo Group Limited M14t V306DHV8" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
+
+#output "SPD NanoKVM-Pro NanoKVM-1080P" disable position 4853,480 mode 1920x1080@60.000Hz
+#output "SPD NanoKVM-Pro NanoKVM-2K" disable position 4853,480 mode 1920x1080@60.000Hz
+#output "Dell Inc. DELL U3219Q 87LK413" disable position 4853,480 mode 3853x0@60.000Hz
+output "Dell Inc. DELL U4025QW FRF8484" enable scale 1.5 position 0,480 mode 5120x2160@120.000Hz
+output "Dell Inc. DELL U3225QE DJC9C84" enable scale 1.5 position 3413,0 transform 90 mode 3840x2160@120.000Hz
+
+workspace 1 output "Dell Inc. DELL U4025QW FRF8484"
+workspace 2 output "Dell Inc. DELL U4025QW FRF8484"
+workspace 4 output "Dell Inc. DELL U3219Q 87LK413"
+
+exec swaymsg "workspace 1; exec $mattermost"
+exec swaymsg "workspace 2; exec $firefox"
+exec swaymsg "workspace 4; exec $term"
+
+# Keybindings for different monitor configurations
+# bindsym $mod+Shift+z output "Dell Inc. DELL U4021QW DD6WB23" enable, output "Samsung Electric Company Odyssey G7 HNBW300412" disable, output "Dell Inc. DELL U3219Q 87LK413" disable
+# bindsym $mod+Shift+x output "Dell Inc. DELL U4021QW DD6WB23" disable, output "Samsung Electric Company Odyssey G7 HNBW300412" enable, output "Dell Inc. DELL U3225QE 57CQ734" enable
+
+# KVM toggle
+# bindsym $mod+Shift+s exec curl -X POST -d '{"id":0,"method":"Switch.Set","params":{"id":0,"on":true}}' 'http://kvm.heppu.io/rpc'
+
+### Idle configuration
+exec swayidle -w \
+         timeout 600 'swaylock -f -c 000000' \
+         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+input type:keyboard {
+    xkb_layout eu,us
+    xkb_model "pc105"
+}

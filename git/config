@@ -43,3 +43,6 @@
 	cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
 
 # User related settings are configured in ~/.gitconfig and not part of this file
+[user]
+	email = henri.t.koski@gmail.com
+	name = Heppu
