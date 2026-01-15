@@ -86,7 +86,9 @@ eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 
 # Node version manager
-eval "$(fnm env --use-on-cd)"
+export FNM_NODE_DIST_MIRROR=https://unofficial-builds.nodejs.org/download/release
+export FNM_ARCH=x64-musl
+eval "$(fnm env --shell zsh --use-on-cd)"
 
 # Aliases
 alias g='git'

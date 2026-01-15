@@ -23,6 +23,9 @@ set $editor code-insiders --ozone-platform=wayland --enable-features=UseOzonePla
 set $mattermost gtk-launch mattermost-desktop
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
+# Alpine only
+exec sh -c 'command -v openrc >/dev/null 2>&1 && openrc -U gui'
+
 # Run wob
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 

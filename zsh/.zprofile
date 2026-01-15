@@ -1,3 +1,6 @@
+# Alpine only
+command -v openrc >/dev/null 2>&1 && openrc -U
+
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 
 if [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
