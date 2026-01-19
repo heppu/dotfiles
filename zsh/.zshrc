@@ -47,12 +47,16 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 zstyle ':completion:*:mage:*' hash-fast true
 
+# Rust stuff
+source $HOME/.cargo/env
+
 # Makefile autocomplete
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
 # User binaries
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
 
 autoload -Uz compinit promptinit bashcompinit select-word-style
 compinit
