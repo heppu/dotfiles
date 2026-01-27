@@ -46,3 +46,10 @@ input type:keyboard {
     xkb_layout eu,us
     xkb_model "pc105"
 }
+
+# Increase pointer speed for your MX Ergo (-1.0 to 1.0, try 0.5)
+input "1133:16495:Logitech_MX_Ergo" {
+  pointer_accel 1
+}
+
+seat seat0 xcursor_theme Adwaita 48
