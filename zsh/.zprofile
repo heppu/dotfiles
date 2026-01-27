@@ -16,3 +16,8 @@ if [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
     export XDG_CONFIG_HOME=$HOME/.config
     exec dbus-run-session sway
 fi
+
+# Start a dbus session for SSH / TTY logins
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ] && [ -n "$SSH_CONNECTION" ]; then
+    exec dbus-run-session "$SHELL"
+fi
