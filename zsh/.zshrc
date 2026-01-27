@@ -96,6 +96,14 @@ if [[ $(ldd /bin/ls 2>/dev/null | grep -c musl) -gt 0 ]]; then
 fi
 eval "$(fnm env --shell zsh --use-on-cd)"
 
+
+unlock-keyring() {
+  local pass
+  read -rs "?Password: " pass
+  print -n -- "$pass" | gnome-keyring-daemon --replace --unlock | source /dev/stdin
+  unset pass
+}
+
 # Aliases
 alias g='git'
 alias k='kubectl'
