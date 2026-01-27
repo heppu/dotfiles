@@ -90,8 +90,10 @@ eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 
 # Node version manager
-export FNM_NODE_DIST_MIRROR=https://unofficial-builds.nodejs.org/download/release
-export FNM_ARCH=x64-musl
+if [[ $(ldd /bin/ls 2>/dev/null | grep -c musl) -gt 0 ]]; then
+  export FNM_NODE_DIST_MIRROR=https://unofficial-builds.nodejs.org/download/release
+  export FNM_ARCH=x64-musl
+fi
 eval "$(fnm env --shell zsh --use-on-cd)"
 
 # Aliases
@@ -100,4 +102,5 @@ alias k='kubectl'
 alias cat='bat'
 alias svi='sudo -E vi'
 alias kssh='kitten ssh'
-alias ls+'ls --color'
+alias ls='eza'
+alias la='eza -la --octal-permissions'
