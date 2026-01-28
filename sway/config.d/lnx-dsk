@@ -13,8 +13,8 @@ output * bg ~/.config/sway/bg/mountains.jpg fill
 #output "SPD NanoKVM-Pro NanoKVM-1080P" disable position 4853,480 mode 1920x1080@60.000Hz
 #output "SPD NanoKVM-Pro NanoKVM-2K" disable position 4853,480 mode 1920x1080@60.000Hz
 #output "Dell Inc. DELL U3219Q 87LK413" disable position 4853,480 mode 3853x0@60.000Hz
-output "Dell Inc. DELL U4025QW FRF8484" enable scale 1.5 position 0,480 mode 5120x2160@120.000Hz
-output "Dell Inc. DELL U3225QE DJC9C84" enable scale 1.5 position 3413,0 transform 90 mode 3840x2160@119.880Hz
+output "Dell Inc. DELL U4025QW FRF8484" enable scale 1.5 position 0,478 mode 5120x2160@120.000Hz
+output "Dell Inc. DELL U3225QE DJC9C84" enable scale 1.5 position 3413,0 transform 90 mode 3840x2160@60.000Hz
 
 workspace 1 output "Dell Inc. DELL U4025QW FRF8484"
 workspace 2 output "Dell Inc. DELL U4025QW FRF8484"
