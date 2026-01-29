@@ -17,10 +17,8 @@ set $right l
 # Default apps
 set $term kitty
 set $menu wofi -a --show drun -i | xargs swaymsg exec --
-set $chrome chromium
-set $firefox firefox-wayland
-set $editor code-insiders --ozone-platform=wayland --enable-features=UseOzonePlatform
-set $mattermost gtk-launch mattermost-desktop
+set $firefox firefox
+set $mattermost flatpak run --user com.mattermost.Desktop
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
 # Alpine only
@@ -195,9 +193,7 @@ bindsym --to-code {
     $mod+d exec $menu
     $mod+n exec $term
     $mod+Shift+n exec $term $(~/.config/sway/swaycwd)
-    $mod+g exec $chrome
     $mod+f exec $firefox
-    $mod+c exec $editor $(~/.config/sway/swaycwd)
     $mod+m exec $mattermost
     $mod+Shift+q kill
 }

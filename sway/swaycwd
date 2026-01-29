@@ -10,8 +10,8 @@ PID=$(echo "$TREE" | jq -r '.. | select(.focused?) | .pid')
 
 # how far down does the rabbit hole go? D:
 while pgrep -P "$PID" >/dev/null; do
-  PID=$(pgrep -P "$PID" | tail -n1)
+	PID=$(pgrep -P "$PID" | tail -n1)
 done
 
 # Show the current working directory
-readlink -e "/proc/$PID/cwd"
+readlink "/proc/$PID/cwd"
