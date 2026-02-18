@@ -23,6 +23,7 @@ Set-Alias cat bat
 New-Alias g git
 New-Alias vi nvim
 New-Alias vim nvim
+New-Alias oc opencode
 
 # Start vscode on ALT+C
 Set-PSReadlineKeyHandler -Key alt+c -ScriptBlock { code-insiders . }
