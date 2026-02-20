@@ -75,10 +75,10 @@ focus_follows_mouse no
 # Moving around:
 #
     # Move your focus around
-    bindsym $mod+$left exec ~/.local/bin/sway-focus left
-    bindsym $mod+$down exec ~/.local/bin/sway-focus down
-    bindsym $mod+$up exec ~/.local/bin/sway-focus up
-    bindsym $mod+$right exec ~/.local/bin/sway-focus right
+    bindsym $mod+$left exec sway-focus left
+    bindsym $mod+$down exec sway-focus down
+    bindsym $mod+$up exec sway-focus up
+    bindsym $mod+$right exec sway-focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
