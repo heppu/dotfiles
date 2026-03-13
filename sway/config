@@ -187,6 +187,11 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Passthrough mode for KVM - disables all sway keybindings
+mode "passthrough" {
+    bindsym $win+Escape mode "default"
+}
+
 # Lock system
 bindsym Mod4+l exec swaylock -f -c 000000
 
@@ -264,6 +269,9 @@ client.focused_inactive $hilight #2e3440 #d8dee9 #4c566a   #4c566a
 client.unfocused        $hilight #2e3440 #d8dee9 #4c566a   #4c566a
 client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
 
+
+# KVM passthrough mode listener
+exec ~/.config/sway/kvm-passthrough.sh
 
 ### Required services
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
