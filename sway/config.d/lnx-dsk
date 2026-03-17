@@ -10,6 +10,7 @@ output * bg ~/.config/sway/bg/mountains.jpg fill
 # output "DENON, Ltd. DENON-AVR 0x01010101" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
 # output "Lenovo Group Limited M14t V306DHV8" disable scale 1 position 0,0 mode 1920x1080@120.000Hz
 
+output "GSS edid.build 0x00000001" enable scale 1.5 position 0,0 mode 2880x1800@59.990Hz
 #output "SPD NanoKVM-Pro NanoKVM-1080P" disable position 4853,480 mode 1920x1080@60.000Hz
 #output "SPD NanoKVM-Pro NanoKVM-2K" disable position 4853,480 mode 1920x1080@60.000Hz
 #output "Dell Inc. DELL U3219Q 87LK413" disable position 4853,480 mode 3853x0@60.000Hz
