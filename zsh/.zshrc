@@ -50,6 +50,9 @@ zstyle ':completion:*:mage:*' hash-fast true
 # Rust stuff
 source $HOME/.cargo/env
 
+# Zig
+export PATH=$HOME/.zvm/bin:$PATH
+
 # Makefile autocomplete
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
