@@ -116,3 +116,24 @@ alias kssh='kitten ssh'
 alias ls='eza'
 alias la='eza -la --octal-permissions'
 alias oc='opencode'
+
+# git worktree
+gwt() {
+  # Usage: gwt <branch> [base]
+  #   gwt feat-foo              -> new branch feat-foo from HEAD
+  #   gwt feat-foo origin/master -> new branch from given base
+  local branch="$1"
+  local base="${2:-HEAD}"
+  if [[ -z "$branch" ]]; then
+    echo "usage: gwt <branch> [base]" >&2
+    return 1
+  fi
+  # Resolve repo root and derive sibling worktree path
+  local root
+  root=$(git rev-parse --show-toplevel) || return 1
+  local repo_name=${root:t}                  # basename
+  local parent=${root:h}                     # dirname
+  local wt_path="$parent/${repo_name}-${branch//\//-}"
+  git worktree add -b "$branch" "$wt_path" "$base" || return 1
+  cd "$wt_path"
+}

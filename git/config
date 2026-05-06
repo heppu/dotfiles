@@ -1,4 +1,7 @@
 [alias]
+	wt = worktree
+	wtr = worktree remove
+	wta = worktree add
 	co = checkout
 	sw = switch
 	rb = rebase
