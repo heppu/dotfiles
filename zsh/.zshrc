@@ -115,7 +115,6 @@ alias svi='sudo -E vi'
 alias kssh='kitten ssh'
 alias ls='eza'
 alias la='eza -la --octal-permissions'
-alias oc='opencode'
 
 # git worktree
 gwt() {

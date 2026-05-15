@@ -1,0 +1,13 @@
+#!/bin/sh
+# Focus the window matching the most recent mako notification.
+
+out=$(makoctl list)
+[ -z "$(printf '%s' "$out" | grep -m1 Notification)" ] && out=$(makoctl history)
+
+app=$(printf '%s\n' "$out" | awk '/Desktop entry:/ {v=$0} END {sub(/.*Desktop entry: */, "", v); print v}')
+[ -z "$app" ] && app=$(printf '%s\n' "$out" | awk '/App name:/ {v=$0} END {sub(/.*App name: */, "", v); print v}')
+[ -z "$app" ] && exit 0
+
+swaymsg "[app_id=\"^${app}$\"] focus" \
+  || swaymsg "[app_id=\"(?i)${app}\"] focus" \
+  || swaymsg "[class=\"(?i)${app}\"] focus"
