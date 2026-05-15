@@ -199,6 +199,7 @@ bindsym Mod4+l exec swaylock -f -c 000000
 bindsym --to-code {
     #$mod+b exec rofi-bluetooth
     $mod+d exec $menu
+    $mod+w exec ~/.config/sway/project-picker
     $mod+n exec $term
     $mod+Shift+n exec $term $(~/.config/sway/swaycwd)
     $mod+f exec $firefox

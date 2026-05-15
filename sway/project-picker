@@ -1,0 +1,49 @@
+#!/bin/sh
+# Fuzzy-pick a project directory, then open it on the first empty workspace
+# with two kitty terminals side by side.
+
+set -eu
+
+base="$HOME/code"
+
+# Pinned entries shown above the ~/code list. Format: "label|path" per line.
+pins=$(printf '%s\n' \
+    "config|$HOME/.config")
+
+repos=
+[ -d "$base" ] && repos=$(
+    find "$base" -mindepth 1 -maxdepth 3 -type d \
+        \( -name .git -o -name node_modules -o -name .direnv -o -name target -o -name vendor \) -prune \
+        -o -type d -print \
+    | sed "s|^$base/||"
+)
+
+selected=$(
+    {
+        echo "$pins" | cut -d'|' -f1
+        [ -n "$repos" ] && echo "$repos"
+    } | wofi --dmenu -i -p "Project"
+) || exit 0
+[ -n "$selected" ] || exit 0
+
+target=$(echo "$pins" | awk -F'|' -v s="$selected" '$1 == s { print $2; exit }')
+[ -n "$target" ] || target="$base/$selected"
+[ -d "$target" ] || { notify-send "project-picker" "not a dir: $target"; exit 1; }
+
+ws=$(swaymsg -t get_workspaces \
+    | jq '[.[].num] as $u | first(range(1;100) | select(. as $n | ($u | index($n)) | not))')
+
+swaymsg "workspace number $ws" >/dev/null
+swaymsg "exec kitty --working-directory '$target'" >/dev/null
+
+for _ in $(seq 1 50); do
+    count=$(swaymsg -t get_tree | jq --argjson ws "$ws" '
+        [.. | objects | select(.type? == "workspace" and .num == $ws)][0]
+        | [.. | objects | select(.app_id? == "kitty")] | length
+    ')
+    [ "$count" -ge 1 ] && break
+    sleep 0.05
+done
+
+swaymsg splith >/dev/null
+swaymsg "exec kitty --working-directory '$target' -- nvim -c 'autocmd User VeryLazy ++once lua Snacks.terminal()'" >/dev/null
