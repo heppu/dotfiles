@@ -54,3 +54,5 @@
 !/ps1/**
 !/pa-dlna
 !/pa-dlna/**
+!/init
+!/init/**

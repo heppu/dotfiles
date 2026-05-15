@@ -2,7 +2,7 @@
 command -v openrc >/dev/null 2>&1 && openrc -U
 
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-export BROWSER=firefox
+export BROWSER=$HOME/.local/bin/browser
 
 if [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
     export SDL_VIDEODRIVER=wayland
