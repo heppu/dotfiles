@@ -3,7 +3,9 @@
 # is focused and fullscreen. Restores default mode otherwise.
 
 MATCH_TITLE="NanoKVM"
-MATCH_APP_ID="Firefox"
+# Matches Firefox and Chromium-based browsers (including --app PWA windows
+# whose app_id is "chrome-<host>__-<profile>").
+MATCH_APP_ID="^(firefox|chromium|chrome-.*)$"
 CURRENT_MODE="default"
 
 set_mode() {
@@ -19,7 +21,7 @@ check_focused_window() {
         | select(.focused == true)
         | "\(.app_id // "")\t\(.name // "")\t\(.fullscreen_mode // 0)"
     ' | while IFS="$(printf '\t')" read -r app_id name fullscreen; do
-        if [ "$app_id" = "$MATCH_APP_ID" ] \
+        if echo "$app_id" | grep -qiE "$MATCH_APP_ID" \
             && echo "$name" | grep -q "$MATCH_TITLE" \
             && [ "$fullscreen" = "1" ]; then
             echo "passthrough"
