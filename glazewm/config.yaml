@@ -181,14 +181,15 @@ binding_modes:
         bindings: ["escape", "enter"]
 
 keybindings:
-  # Shift focus in a given direction.
-  - commands: ["focus --direction left"]
+  # Shift focus in a given direction. Uses `nvg` so focus moves seamlessly
+  # between Neovim splits and GlazeWM windows before crossing the edge.
+  - commands: ["shell-exec nvg left"]
     bindings: ["lalt+h"]
-  - commands: ["focus --direction right"]
+  - commands: ["shell-exec nvg right"]
     bindings: ["lalt+l"]
-  - commands: ["focus --direction up"]
+  - commands: ["shell-exec nvg up"]
     bindings: ["lalt+k"]
-  - commands: ["focus --direction down"]
+  - commands: ["shell-exec nvg down"]
     bindings: ["lalt+j"]
 
   # Move focused window in a given direction.
