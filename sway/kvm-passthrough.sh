@@ -1,11 +1,15 @@
 #!/bin/sh
-# Automatically enable passthrough mode when a KVM window (NanoKVM in Firefox)
-# is focused and fullscreen. Restores default mode otherwise.
+# Automatically enable passthrough mode when a focused window matches one of
+# the configured rules and is fullscreen. Restores default mode otherwise.
+#
+# Rules are app_id regex + optional title regex. Empty title regex matches any.
 
-MATCH_TITLE="NanoKVM"
-# Matches Firefox and Chromium-based browsers (including --app PWA windows
-# whose app_id is "chrome-<host>__-<profile>").
-MATCH_APP_ID="^(firefox|chromium|chrome-.*)$"
+# app_id_regex<TAB>title_regex
+RULES=$(printf '%s\n' \
+    '^(firefox|chromium|chrome-.*)$	NanoKVM' \
+    '^org\.remmina\.Remmina$	' \
+)
+
 CURRENT_MODE="default"
 
 set_mode() {
@@ -16,36 +20,38 @@ set_mode() {
 }
 
 check_focused_window() {
-    swaymsg -t get_tree | jq -r '
+    focused=$(swaymsg -t get_tree | jq -r '
         recurse(.nodes[], .floating_nodes[])
         | select(.focused == true)
         | "\(.app_id // "")\t\(.name // "")\t\(.fullscreen_mode // 0)"
-    ' | while IFS="$(printf '\t')" read -r app_id name fullscreen; do
-        if echo "$app_id" | grep -qiE "$MATCH_APP_ID" \
-            && echo "$name" | grep -q "$MATCH_TITLE" \
-            && [ "$fullscreen" = "1" ]; then
-            echo "passthrough"
-        else
-            echo "default"
+    ')
+    [ -z "$focused" ] && { echo "default"; return; }
+
+    IFS="$(printf '\t')" read -r app_id name fullscreen <<EOF
+$focused
+EOF
+
+    [ "$fullscreen" = "1" ] || { echo "default"; return; }
+
+    echo "$RULES" | while IFS="$(printf '\t')" read -r app_re title_re; do
+        [ -z "$app_re" ] && continue
+        echo "$app_id" | grep -qiE "$app_re" || continue
+        if [ -n "$title_re" ]; then
+            echo "$name" | grep -qE "$title_re" || continue
         fi
-    done
+        echo "passthrough"
+        return
+    done | grep -q passthrough && echo "passthrough" || echo "default"
 }
 
-# Check on startup in case KVM is already focused and fullscreen
 mode=$(check_focused_window)
 [ "$mode" = "passthrough" ] && set_mode "passthrough"
 
-# Listen for window events (focus, fullscreen, close, etc.)
 swaymsg -t subscribe '["window"]' -m | while read -r event; do
     change=$(echo "$event" | jq -r '.change')
     case "$change" in
         focus|fullscreen_mode|close)
-            mode=$(check_focused_window)
-            if [ "$mode" = "passthrough" ]; then
-                set_mode "passthrough"
-            else
-                set_mode "default"
-            fi
+            set_mode "$(check_focused_window)"
             ;;
     esac
 done
