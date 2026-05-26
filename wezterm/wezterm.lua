@@ -26,7 +26,7 @@ config.font_size = 11
 config.window_decorations = "RESIZE"
 
 -- Default shell
-config.default_prog = { 'C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe', '/nologo', '-WorkingDirectory',  '~' }
+config.default_prog = { 'C:\\Users\\heppu\\AppData\\Local\\Microsoft\\WindowsApps\\pwsh.exe', '-NoLogo', '-WorkingDirectory', '~' }
 
 -- and finally, return the configuration to wezterm
 return config
