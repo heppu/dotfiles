@@ -92,6 +92,9 @@ eval "$(fzf --zsh)"
 # Starship prompt
 eval "$(starship init zsh)"
 
+# Taskfile autocomplete
+eval "$(task --completion zsh)"
+
 # Node version manager
 if [[ $(ldd /bin/ls 2>/dev/null | grep -c musl) -gt 0 ]]; then
   export FNM_NODE_DIST_MIRROR=https://unofficial-builds.nodejs.org/download/release
