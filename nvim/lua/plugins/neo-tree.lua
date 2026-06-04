@@ -1,6 +1,23 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   opts = {
+    event_handlers = {
+      {
+        event = "after_render",
+        handler = function(state)
+          local preview = require("neo-tree.sources.common.preview")
+          if
+            state
+            and state.tree
+            and state.winid == vim.api.nvim_get_current_win()
+            and not preview.is_active()
+          then
+            state.config = { use_float = false }
+            preview.toggle(state)
+          end
+        end,
+      },
+    },
     filesystem = {
       window = {
         mappings = {
