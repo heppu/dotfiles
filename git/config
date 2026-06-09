@@ -1,7 +1,7 @@
 [alias]
 	wt = worktree
 	wtr = worktree remove
-	wta = worktree add
+	wta = "!f() { git worktree add -b \"$1\" \"$(git rev-parse --show-toplevel)-$1\" \"${2:-HEAD}\"; }; f"
 	co = checkout
 	sw = switch
 	rb = rebase
