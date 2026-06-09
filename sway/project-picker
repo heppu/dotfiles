@@ -30,8 +30,12 @@ target=$(echo "$pins" | awk -F'|' -v s="$selected" '$1 == s { print $2; exit }')
 [ -n "$target" ] || target="$base/$selected"
 [ -d "$target" ] || { notify-send "project-picker" "not a dir: $target"; exit 1; }
 
-ws=$(swaymsg -t get_workspaces \
-    | jq '[.[].num] as $u | first(range(1;100) | select(. as $n | ($u | index($n)) | not))')
+ws=$(swaymsg -t get_tree | jq '
+    [ .. | objects
+      | select(.type? == "workspace" and (.num? // -1) >= 1)
+      | select(any(.. | objects; (.app_id? // .window?) != null))
+      | .num ] as $used
+    | first(range(1;100) | select(. as $n | ($used | index($n)) | not))')
 
 swaymsg "workspace number $ws" >/dev/null
 swaymsg "exec kitty --working-directory '$target'" >/dev/null
