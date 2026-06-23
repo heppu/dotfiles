@@ -17,6 +17,16 @@ return {
           end
         end,
       },
+      {
+        event = "neo_tree_buffer_enter",
+        handler = function(state)
+          local preview = require("neo-tree.sources.common.preview")
+          if state and state.tree and not preview.is_active() then
+            state.config = { use_float = false }
+            preview.toggle(state)
+          end
+        end,
+      },
     },
     filesystem = {
       window = {
