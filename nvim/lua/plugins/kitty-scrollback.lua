@@ -1,5 +1,6 @@
 return {
-  "mikesmithgh/kitty-scrollback.nvim",
+  "heppu/kitty-scrollback.nvim",
+  branch = "support-busybox-sed",
   enabled = true,
   lazy = true,
   cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth", "KittyScrollbackGenerateCommandLineEditing" },
