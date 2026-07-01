@@ -10,7 +10,7 @@ return {
           root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
           init_options = {
             command = {
-              "golangci-lint",
+              vim.fn.expand("~/go/bin/golangci-lint"),
               "run",
               "--output.json.path",
               "stdout",
