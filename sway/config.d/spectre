@@ -51,6 +51,4 @@ bindsym XF86MonBrightnessUp exec brillo -A 2 && (echo "$(brillo -G) / 1" | bc > 
 bindsym XF86MonBrightnessDown exec brillo -U 2 && (echo "$(brillo -G) / 1" | bc > $WOBSOCK)
 
 
-# Run kanshi to configure external displays automatically
-exec_always kill -1 $(pidof kanshi)
-exec ~/.config/kanshi/run.sh
+exec_always ~/.config/kanshi/run.sh
