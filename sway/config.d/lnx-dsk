@@ -6,14 +6,10 @@ output "SPD NanoKVM-Pro NanoKVM-1080P" disable position 4853,480 mode 1920x1080@
 output "SPD NanoKVM-Pro NanoKVM-2K" disable position 4853,480 mode 1920x1080@60.000Hz
 
 ### Idle configuration
+# No DPMS power-off: tearing down the 6K joiner pipes wedges DP-1 dark until a sway restart (Arc B580 wlroots bug).
 exec swayidle -w \
          timeout 600 'swaylock -f -c 000000' \
-         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 input type:keyboard {
