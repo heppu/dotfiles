@@ -15,6 +15,7 @@
     "idle_inhibitor",
     "bluetooth",
     "temperature",
+    "temperature#cpu",
     "cpu",
     "memory",
     "custom/xbps",
@@ -99,11 +100,18 @@
     "on-scroll-down": "pamixer --default-source -d 1"
   },
   "temperature": {
-    // "thermal-zone": 2,
-    "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon",
+    "input-filename": "temp1_input",
     "critical-threshold": 85,
-    "format-critical": "{temperatureC}°C ",
-    "format": "{temperatureC}°C "
+    "format-critical": "{temperatureC}°C 󰢮",
+    "format": "{temperatureC}°C 󰢮"
+  },
+  "temperature#cpu": {
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+    "input-filename": "temp1_input",
+    "critical-threshold": 85,
+    "format-critical": "{temperatureC}°C ",
+    "format": "{temperatureC}°C "
   },
   "tray": {
     "show-passive-items": true,
