@@ -1,0 +1,28 @@
+profile old_dell {
+  output eDP-1 disable
+  output "Dell Inc. DELL U4021QW DD6WB23" enable scale 1.5 position 0,0 mode 5120x2160@59.985Hz
+}
+
+profile solo {
+  output eDP-1 enable scale 1.5 position 0,0 mode 2880x1800@120.000Hz
+}
+
+profile work-1 {
+  output eDP-1 enable scale 1.5 position 320,1440 mode 2880x1800@120.000Hz
+  output "Lenovo Group Limited P32p-30 V30CCGMC" enable scale 1.5 position 0,0 mode 3840x2160@59.997Hz
+}
+
+profile work-2 {
+  output eDP-1 enable scale 1.5 position 320,1440 mode 2880x1800@120.000Hz
+  output "Dell Inc. DELL P3223QE 50V2XN3" enable scale 1.5 position 0,0 mode 3840x2160@59.997Hz
+}
+
+profile work-3 {
+  output eDP-1 enable scale 1.5 position 320,1440 mode 2880x1800@120.000Hz
+  output "Lenovo Group Limited P32p-30 V30CCGMM" enable scale 1.5 position 0,0 mode 3840x2160@59.997Hz
+}
+
+profile massive-dell {
+  output eDP-1 enable scale 1.5 position 1099,1706 mode 2880x1800@120.000Hz
+  output "Dell Inc. DELL U5226KW 1NXKGF4" enable scale 1.5 position 0,0 mode 6144x2560@119.996Hz
+}

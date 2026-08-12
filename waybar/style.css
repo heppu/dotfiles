@@ -50,7 +50,7 @@ window#waybar {
 #bluetooth,
 #temperature,
 #idle_inhibitor,
-#custom-xbps,
+#custom-apk,
 #tray {
     padding: 0 14px;
     margin: 0 0px;
@@ -58,7 +58,7 @@ window#waybar {
     border-right: 1px solid #ffffff;
 }
 
-#custom-xbps {
+#custom-apk {
     border-right: none;
 }
 

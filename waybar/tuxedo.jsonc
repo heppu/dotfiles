@@ -15,8 +15,9 @@
     "idle_inhibitor",
     "bluetooth",
     "temperature",
-    "cpu",
-    "memory",
+    "backlight",
+    "battery",
+    "network",
     "custom/apk",
     "tray"
   ],
@@ -62,14 +63,40 @@
       }
     }
   },
-  "cpu": {
-    "format": "{usage}% ",
-    "tooltip": false,
-    "interval": 1
+  "backlight": {
+    "on-scroll-up": "brillo -A 2",
+    "on-scroll-down": "brillo -U 2",
+    "format": "{percent}% {icon}",
+    "format-icons": [
+      "󰛩",
+      "󱩎",
+      "󱩏",
+      "󱩐",
+      "󱩑",
+      "󱩒",
+      "󱩓",
+      "󱩔",
+      "󱩕",
+      "󱩖",
+      "󰛨"
+    ]
   },
-  "memory": {
-    "format": "{}% ",
-    "interval": 1
+  "battery": {
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{capacity}% {icon} ",
+    "format-charging": "{capacity}%  ",
+    "format-plugged": "{capacity}%  ",
+    "format-alt": "{time} {icon} ",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "pulseaudio#out": {
     "format": "{volume}% {icon}",
@@ -100,11 +127,31 @@
     "on-scroll-down": "pamixer --default-source -d 1"
   },
   "temperature": {
-    // "thermal-zone": 2,
-    "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
+    // k10temp Tctl
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+    "input-filename": "temp1_input",
     "critical-threshold": 85,
     "format-critical": "{temperatureC}°C ",
     "format": "{temperatureC}°C "
+  },
+  "network": {
+    "on-click": "~/.config/waybar/custom/wifi-toggle.sh",
+    "format": "{ifname}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "󰤮",
+    "format-disabled": "󰖪",
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "({essid} {signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ]
   },
   "tray": {
     "show-passive-items": true,

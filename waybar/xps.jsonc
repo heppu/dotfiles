@@ -20,7 +20,8 @@
     "tray"
   ],
   "bluetooth": {
-    "on-click": "sudo rfkill toggle bluetooth",
+    // no sudo on Alpine and /dev/rfkill is root-only, toggle via bluez instead
+    "on-click": "sh -c 'bluetoothctl show | grep -q \"Powered: yes\" && bluetoothctl power off || bluetoothctl power on'",
     "format": "",
     "format-disabled": "󰂲",
     "format-connected": " {num_connections} connected",
@@ -116,11 +117,12 @@
     "format": "{temperatureC}°C "
   },
   "network": {
-    "on-click": "iwgtk",
+    "on-click": "~/.config/waybar/custom/wifi-toggle.sh",
     "format": "{ifname}",
     "format-wifi": "{icon}",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
     "format-disconnected": "󰤮",
+    "format-disabled": "󰖪",
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
     "tooltip-format-wifi": "({essid} {signalStrength}%)",
     "tooltip-format-ethernet": "{ifname} ",

@@ -18,15 +18,15 @@
     "temperature#cpu",
     "cpu",
     "memory",
-    "custom/xbps",
+    "custom/apk",
     "tray"
   ],
-  "custom/xbps": {
-    "format": "{} ",
+  "custom/apk": {
+    "format": "{} ",
     "return-type": "json",
     "tooltip": true,
     "interval": "3600",
-    "exec": "~/.config/waybar/custom/xbps-updates.sh"
+    "exec": "~/.config/waybar/custom/apk-updates.sh"
   },
   "idle_inhibitor": {
     "format": "{icon} ",
@@ -36,7 +36,8 @@
     }
   },
   "bluetooth": {
-    "on-click": "sudo rfkill toggle bluetooth",
+    // no sudo on Alpine and /dev/rfkill is root-only, toggle via bluez instead
+    "on-click": "sh -c 'bluetoothctl show | grep -q \"Powered: yes\" && bluetoothctl power off || bluetoothctl power on'",
     "format": "",
     "format-disabled": "󰂲",
     "format-connected": " {num_connections} connected",
