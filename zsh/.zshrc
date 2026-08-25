@@ -35,9 +35,10 @@ zstyle ':autocomplete:*' default-context history-incremental-search-backward
 }
 zle -C autocomplete-tab menu-select .autocomplete-tab__completion-widget
 bindkey '^I' autocomplete-tab
-# Tab/Shift-Tab cycle options inside the menu
-bindkey -M menuselect '^I' menu-complete
-bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
+# Left/right exit the menu and move the cursor instead of changing selection
+bindkey -M menuselect '^[[D' .backward-char '^[OD' .backward-char '^[[C' .forward-char '^[OC' .forward-char
+# Don't append ';' (multi-select) when accepting a history line
+zstyle ':autocomplete:*' add-semicolon no
 
 # Autocomplete setup
 zstyle ':completion::complete:*' gain-privileges 1
