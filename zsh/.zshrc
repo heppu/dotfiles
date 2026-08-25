@@ -14,7 +14,6 @@ setopt EXTENDED_GLOB
 
 # History setup
 setopt share_history
-setopt appendhistory
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_find_no_dups
@@ -42,7 +41,6 @@ bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
 
 # Autocomplete setup
 zstyle ':completion::complete:*' gain-privileges 1
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # No dircolors on Alpine, so define LS_COLORS by hand
 export LS_COLORS='di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:or=1;31:mi=2;37:su=37;41:sg=30;43:tw=30;42:ow=1;34:st=37;44'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" 'ma=30;42'
@@ -93,8 +91,6 @@ function _fg() { echo "fg"; fg; zle reset-prompt; zle redisplay}
 zle -N _fg
 bindkey '^f' _fg
 
-# fzf-tab disabled: incompatible with zsh-autocomplete
-#source $ZDOTDIR/plugins/fzf-tab/fzf-tab.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(autocomplete-tab)
