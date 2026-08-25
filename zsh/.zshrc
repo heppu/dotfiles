@@ -2,7 +2,6 @@
 HISTFILE=~/.histfile
 HISTSIZE=100000000
 SAVEHIST=100000000
-HISTDUP=erase
 
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -17,24 +16,41 @@ setopt EXTENDED_GLOB
 setopt share_history
 setopt appendhistory
 setopt hist_ignore_all_dups
-setopt hist_ignore_dups
 setopt hist_save_no_dups
 setopt hist_find_no_dups
+setopt hist_ignore_space
+setopt extended_history
 
 # Live type-ahead history search: new command lines start in ctrl-r mode
 source $ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
+# Tab: force a fresh normal completion, ignoring the history-search context/listing
+.autocomplete-tab__completion-widget() {
+  unset curcontext
+  local +h curcontext=complete-word:::
+  local +h -a comppostfuncs=( .autocomplete__complete-word__post "$comppostfuncs[@]" )
+  compstate[old_list]=
+  autocomplete:_main_complete:new
+  [[ $_lastcomp[nmatches] -gt 0 && -n $compstate[insert] ]]
+}
+zle -C autocomplete-tab menu-select .autocomplete-tab__completion-widget
+bindkey '^I' autocomplete-tab
+# Tab/Shift-Tab cycle options inside the menu
+bindkey -M menuselect '^I' menu-complete
+bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
 
 # Autocomplete setup
 zstyle ':completion::complete:*' gain-privileges 1
-zstyle ':completion:*' matcher-list 'm:{a-z}={A_Za-Z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# No dircolors on Alpine, so define LS_COLORS by hand
+export LS_COLORS='di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:or=1;31:mi=2;37:su=37;41:sg=30;43:tw=30;42:ow=1;34:st=37;44'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" 'ma=30;42'
 zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:descriptions' format $'%{\e[1;33m%}[%d]%{\e[0m%}'
 
-#Include completions from user dir
-fpath=(~/.config/zsh/site-functions $fpath)
+#Include completions from user dir + zsh-completions package
+fpath=(~/.config/zsh/site-functions /usr/share/zsh/plugins/zsh-completions/src $fpath)
 
 # Config files
 export BAT_CONFIG_DIR=$HOME/.config/bat
@@ -61,8 +77,7 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.opencode/bin:$PATH
 
 # compinit is run by zsh-autocomplete
-autoload -Uz promptinit bashcompinit select-word-style
-promptinit
+autoload -Uz bashcompinit select-word-style
 bashcompinit
 # Breaks word at slashes
 select-word-style bash
@@ -80,8 +95,9 @@ bindkey '^f' _fg
 
 # fzf-tab disabled: incompatible with zsh-autocomplete
 #source $ZDOTDIR/plugins/fzf-tab/fzf-tab.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(autocomplete-tab)
 source $ZDOTDIR/plugins/dirhistory.plugin.zsh
 
 # fzf integration
@@ -112,33 +128,14 @@ unlock-keyring() {
 alias g='git'
 alias k='kubectl'
 alias cat='bat'
-alias svi='sudo -E vi'
 alias kssh='kitten ssh'
 alias ls='eza'
 alias la='eza -la --octal-permissions'
-
-# git worktree
-gwt() {
-  # Usage: gwt <branch> [base]
-  #   gwt feat-foo              -> new branch feat-foo from HEAD
-  #   gwt feat-foo origin/master -> new branch from given base
-  local branch="$1"
-  local base="${2:-HEAD}"
-  if [[ -z "$branch" ]]; then
-    echo "usage: gwt <branch> [base]" >&2
-    return 1
-  fi
-  # Resolve repo root and derive sibling worktree path
-  local root
-  root=$(git rev-parse --show-toplevel) || return 1
-  local repo_name=${root:t}                  # basename
-  local parent=${root:h}                     # dirname
-  local wt_path="$parent/${repo_name}-${branch//\//-}"
-  git worktree add -b "$branch" "$wt_path" "$base" || return 1
-  cd "$wt_path"
-}
 
 # Google Cloud SDK
 export CLOUDSDK_PYTHON=/usr/bin/python3  # pin musl-safe python (bundled glibc python breaks on Alpine)
 if [ -f '/home/heppu/google-cloud-sdk/path.zsh.inc' ]; then . '/home/heppu/google-cloud-sdk/path.zsh.inc'; fi
 if [ -f '/home/heppu/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/heppu/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Must be sourced last, after everything that adds widgets
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
