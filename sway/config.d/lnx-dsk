@@ -21,5 +21,3 @@ input type:keyboard {
 input "1133:16495:Logitech_MX_Ergo" {
   pointer_accel 1
 }
-
-seat seat0 xcursor_theme Adwaita 48

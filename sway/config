@@ -50,11 +50,17 @@ for_window [app_id=".*"] inhibit_idle fullscreen
 
 
 ### Mouse
-seat seat0 xcursor_theme Adwaita 24
+seat seat0 xcursor_theme breeze_cursors 20
 
 # Disable cursor jumping
 mouse_warping none
 focus_follows_mouse no
+
+### GTK app settings (gsettings via portal)
+exec_always gsettings set org.gnome.desktop.interface cursor-theme breeze_cursors
+exec_always gsettings set org.gnome.desktop.interface cursor-size 20
+# dark by default on first login; theme-toggle.sh owns color-scheme/gtk-theme after
+exec_always "gsettings get org.gnome.desktop.interface color-scheme | grep -qw default && gsettings set org.gnome.desktop.interface color-scheme prefer-dark && gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark"
 
 ### Key bindings
 #
