@@ -36,7 +36,7 @@
     "format": "{} ",
     "return-type": "json",
     "tooltip": true,
-    "interval": "3600",
+    "interval": 3600,
     "exec": "~/.config/waybar/custom/apk-updates.sh"
   },
   "idle_inhibitor": {
