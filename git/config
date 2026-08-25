@@ -44,7 +44,14 @@
 	prompt = false
 [mergetool "nvimdiff"]
 	cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
-
+[core]
+	pager = delta
+[delta]
+	navigate = true
+	line-numbers = true
+	syntax-theme = base16-256
+[interactive]
+	diffFilter = delta --color-only
 # User related settings are configured in ~/.gitconfig and not part of this file
 [user]
 	email = henri.t.koski@gmail.com
