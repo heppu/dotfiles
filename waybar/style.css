@@ -1,3 +1,6 @@
+/* colors.css is written by custom/theme-toggle.sh from colors-{dark,light}.css */
+@import url("colors.css");
+
 * {
     border: none;
     border-radius: 0;
@@ -7,9 +10,9 @@
 }
 
 window#waybar {
-    background-color: #242933;
+    background-color: @bar-bg;
     border-bottom: 0px;
-    color: #ffffff;
+    color: @bar-fg;
     transition-property: background-color;
     transition-duration: .2s;
 }
@@ -17,18 +20,18 @@ window#waybar {
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
-    color: #eceff4;
+    color: @bar-fg;
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
 }
 
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 -3px #ffffff;
+    box-shadow: inset 0 -3px @bar-fg;
 }
 
 #workspaces button.focused {
-    box-shadow: inset 0 -3px #ffffff;
+    box-shadow: inset 0 -3px @bar-fg;
 }
 
 #workspaces button.urgent {
@@ -36,8 +39,8 @@ window#waybar {
 }
 
 #mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    background-color: @mode-bg;
+    border-bottom: 3px solid @bar-fg;
 }
 
 #cpu,
@@ -51,20 +54,21 @@ window#waybar {
 #temperature,
 #idle_inhibitor,
 #custom-apk,
+#custom-theme,
 #tray {
     padding: 0 14px;
     margin: 0 0px;
-    color: #ffffff;
-    border-right: 1px solid #ffffff;
+    color: @bar-fg;
+    border-right: 1px solid @bar-fg;
 }
 
-#custom-apk {
+#custom-theme {
     border-right: none;
 }
 
 #tray {
   border-right: none;
-  border-left: 1px solid #ffffff;
+  border-left: 1px solid @bar-fg;
 }
 
 #window,
@@ -73,12 +77,12 @@ window#waybar {
 }
 
 #clock {
-    color: #ffffff;
+    color: @bar-fg;
 }
 
 @keyframes blink {
     to {
-        background-color: #e5e9f0;
+        background-color: @blink-bg;
     }
 }
 

@@ -19,8 +19,19 @@
     "battery",
     "network",
     "custom/apk",
+    "custom/theme",
     "tray"
   ],
+  "custom/theme": {
+    "exec": "~/.config/waybar/custom/theme-toggle.sh",
+    "on-click": "~/.config/waybar/custom/theme-toggle.sh toggle",
+    "format": "{}",
+    // "once" busy-loops a waybar thread on musl, use a long interval instead
+    "interval": 3600,
+    "signal": 8,
+    "exec-on-event": false,
+    "tooltip": false
+  },
   "custom/apk": {
     "format": "{} ",
     "return-type": "json",
