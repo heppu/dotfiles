@@ -21,18 +21,17 @@ setopt hist_ignore_dups
 setopt hist_save_no_dups
 setopt hist_find_no_dups
 
+# Live type-ahead history search: new command lines start in ctrl-r mode
+source $ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+zstyle ':autocomplete:*' min-input 1
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
+
 # Autocomplete setup
 zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*' matcher-list 'm:{a-z}={A_Za-Z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2
-zstyle ':fzf-tab:*' use-fzf-default-opts yes
-zstyle ':fzf-tab:*' switch-group '<' '>'
-# preview directory's content with eza when completing cd
-#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 #Include completions from user dir
 fpath=(~/.config/zsh/site-functions $fpath)
@@ -61,8 +60,8 @@ zstyle ':completion:*:*:make:*' tag-order 'targets'
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.opencode/bin:$PATH
 
-autoload -Uz compinit promptinit bashcompinit select-word-style
-compinit
+# compinit is run by zsh-autocomplete
+autoload -Uz promptinit bashcompinit select-word-style
 promptinit
 bashcompinit
 # Breaks word at slashes
@@ -72,16 +71,15 @@ select-word-style bash
 bindkey '^[[1;5C' forward-word     # Ctrl+right arrow
 bindkey '^[[1;5D' backward-word    # Ctrl+left arrow
 
-# Scroll history with arrow keys
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+# Arrow keys: zsh-autocomplete uses up for history menu, down for listing
 
 # Bind Ctrl+f to fg command
 function _fg() { echo "fg"; fg; zle reset-prompt; zle redisplay}
 zle -N _fg
 bindkey '^f' _fg
 
-source $ZDOTDIR/plugins/fzf-tab/fzf-tab.zsh
+# fzf-tab disabled: incompatible with zsh-autocomplete
+#source $ZDOTDIR/plugins/fzf-tab/fzf-tab.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/dirhistory.plugin.zsh
