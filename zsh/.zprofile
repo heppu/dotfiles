@@ -15,6 +15,7 @@ if [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
     export XDG_SCREENSHOTS_DIR=$HOME/Pictures/Screenshots
     export XDG_CURRENT_DESKTOP=sway
     export XDG_CONFIG_HOME=$HOME/.config
+    export GTK_USE_PORTAL=1
     exec dbus-run-session sway
 fi
 
