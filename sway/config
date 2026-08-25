@@ -15,7 +15,8 @@ set $down j
 set $up k
 set $right l
 # Default apps
-set $term kitty
+# single-instance: new windows reuse the running kitty process, ~2ms vs ~700ms
+set $term kitty --single-instance
 set $menu wofi -a --show drun -i | xargs swaymsg exec --
 set $firefox firefox
 set $mattermost flatpak run --user com.mattermost.Desktop
@@ -201,7 +202,7 @@ bindsym --to-code {
     $mod+d exec $menu
     $mod+w exec ~/.config/sway/project-picker
     $mod+n exec $term
-    $mod+Shift+n exec $term $(~/.config/sway/swaycwd)
+    $mod+Shift+n exec $term --directory "$(~/.config/sway/swaycwd || echo "$HOME")"
     $mod+f exec $firefox
     $mod+m exec $mattermost
     $mod+Shift+q kill

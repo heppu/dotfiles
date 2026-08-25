@@ -1,17 +1,29 @@
 #!/bin/sh
-# Author: Caleb Stewart
-# URL: https://github.com/calebstewart/swaycwd.git
-# Description: print the CWD of the currently focused window in swaywm
+# Print the CWD of the focused window's shell, falling back to $HOME.
+FOCUSED=$(swaymsg -t get_tree | jq -c '.. | select(.focused?)')
+PID=$(echo "$FOCUSED" | jq -r '.pid')
 
-# Grab the window/display tree
-TREE=$(swaymsg -t get_tree)
-# Find the focused node
-PID=$(echo "$TREE" | jq -r '.. | select(.focused?) | .pid')
+# kitty is single-instance (shared pid), so ask it over its control socket
+if [ "$(echo "$FOCUSED" | jq -r '.app_id')" = kitty ]; then
+	CWD=$(kitty @ --to "unix:@mykitty-$PID" ls 2>/dev/null | jq -r '
+		.[] | select(.is_focused) | .tabs[] | select(.is_active)
+		| .windows[] | select(.is_focused)
+		| (.foreground_processes[0].cwd // .cwd) // empty')
+	[ -n "$CWD" ] && { echo "$CWD"; exit 0; }
+fi
 
-# how far down does the rabbit hole go? D:
-while pgrep -P "$PID" >/dev/null; do
-	PID=$(pgrep -P "$PID" | tail -n1)
+# other terminals: BFS the process tree for a shell, skipping helper processes
+QUEUE=$PID
+while [ -n "$QUEUE" ]; do
+	NEXT=
+	for P in $QUEUE; do
+		case "$(cat "/proc/$P/comm" 2>/dev/null)" in
+		zsh | bash | fish | sh | ash)
+			readlink "/proc/$P/cwd" && exit 0
+			;;
+		esac
+		NEXT="$NEXT $(pgrep -P "$P")"
+	done
+	QUEUE=${NEXT# }
 done
-
-# Show the current working directory
-readlink "/proc/$PID/cwd"
+echo "$HOME"
