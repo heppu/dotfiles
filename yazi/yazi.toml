@@ -1,0 +1,5 @@
+# yazi.toml
+[preview]
+# Defaults (600x900) render tiny on hidpi; cover 5K2K + rotated 4K outputs.
+max_width = 6144
+max_height = 3840
