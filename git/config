@@ -56,3 +56,5 @@
 [user]
 	email = henri.t.koski@gmail.com
 	name = Heppu
+[submodule]
+	recurse = true
