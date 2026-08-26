@@ -121,6 +121,10 @@ unlock-keyring() {
   unset pass
 }
 
+claude-pro() {
+    CLAUDE_CONFIG_DIR=~/.claude-pro claude "$@"
+}
+
 # Aliases
 alias g='git'
 alias k='kubectl'
