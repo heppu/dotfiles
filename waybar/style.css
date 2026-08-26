@@ -55,6 +55,7 @@ window#waybar {
 #idle_inhibitor,
 #custom-apk,
 #custom-theme,
+#custom-zfs,
 #tray {
     padding: 0 14px;
     margin: 0 0px;
@@ -62,13 +63,18 @@ window#waybar {
     border-right: 1px solid @bar-fg;
 }
 
-#custom-theme {
-    border-right: none;
-}
-
+/* every module draws its own right separator, so tray must not add one too */
 #tray {
   border-right: none;
-  border-left: 1px solid @bar-fg;
+  border-left: none;
+}
+
+#custom-zfs.critical {
+    background-color: #bf616a;
+}
+
+#custom-zfs.warning {
+    background-color: #d08770;
 }
 
 #window,

@@ -20,6 +20,7 @@
     "network",
     "custom/apk",
     "custom/theme",
+    "custom/zfs",
     "tray"
   ],
   "custom/theme": {
@@ -38,6 +39,13 @@
     "tooltip": true,
     "interval": 3600,
     "exec": "~/.config/waybar/custom/apk-updates.sh"
+  },
+  "custom/zfs": {
+    "format": "{} 󰋊",
+    "return-type": "json",
+    "tooltip": true,
+    "interval": 300,
+    "exec": "~/.config/waybar/custom/zfs-status.sh zroot"
   },
   "idle_inhibitor": {
     "format": "{icon} ",

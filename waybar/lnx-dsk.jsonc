@@ -19,6 +19,8 @@
     "cpu",
     "memory",
     "custom/apk",
+    "custom/zfs#data",
+    "custom/zfs#pool",
     "tray"
   ],
   "custom/apk": {
@@ -27,6 +29,20 @@
     "tooltip": true,
     "interval": 3600,
     "exec": "~/.config/waybar/custom/apk-updates.sh"
+  },
+  "custom/zfs#data": {
+    "format": "data {} 󰋊",
+    "return-type": "json",
+    "tooltip": true,
+    "interval": 300,
+    "exec": "~/.config/waybar/custom/zfs-status.sh data"
+  },
+  "custom/zfs#pool": {
+    "format": "pool {} 󰋊",
+    "return-type": "json",
+    "tooltip": true,
+    "interval": 300,
+    "exec": "~/.config/waybar/custom/zfs-status.sh pool"
   },
   "idle_inhibitor": {
     "format": "{icon} ",
