@@ -1,0 +1,20 @@
+#!/bin/sh
+# Mattermost and both Teams instances are placed by `assign` rules in the
+# sway config. Firefox is not assigned (the `browser` wrapper opens it on
+# whatever workspace is focused), so move just the first window here.
+
+flatpak run --user com.mattermost.Desktop &
+~/.local/bin/elisa-teams &
+~/.local/bin/jamix-teams &
+
+firefox &
+i=0
+while [ "$i" -lt 60 ]; do
+	id=$(swaymsg -t get_tree | jq -r 'first(.. | objects | select(.app_id == "firefox") | .id) // empty')
+	[ -n "$id" ] && break
+	i=$((i + 1))
+	sleep 0.5
+done
+[ -n "$id" ] && swaymsg "[con_id=$id] move to workspace number 3"
+
+swaymsg "workspace number 1"

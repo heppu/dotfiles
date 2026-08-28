@@ -5,6 +5,18 @@ output "GSS edid.build 0x00000001" disable scale 1.5 position 0,0 mode 2880x1800
 output "SPD NanoKVM-Pro NanoKVM-1080P" disable position 4853,480 mode 1920x1080@60.000Hz
 output "SPD NanoKVM-Pro NanoKVM-2K" disable position 4853,480 mode 1920x1080@60.000Hz
 
+### Workspace layout
+workspace 1 output "Dell Inc. DELL U3225QE DJC9C84"
+workspace 2 output "Dell Inc. DELL U3225QE DJC9C84"
+workspace 3 output "Dell Inc. DELL U5226KW 1NXKGF4"
+
+# Windows map seconds after the exec fires, so pin the chat apps by criteria
+# instead of racing `workspace N; exec`.
+assign [app_id="com.mattermost.Desktop"] workspace number 1
+assign [app_id="com.github.IsmaelMartinez.teams_for_linux"] workspace number 2
+
+exec ~/.config/sway/lnx-layout
+
 ### Idle configuration
 exec swayidle -w \
          timeout 600 'swaylock -f -c 000000' \
