@@ -20,33 +20,18 @@ setopt hist_find_no_dups
 setopt hist_ignore_space
 setopt extended_history
 
-# Live type-ahead history search: new command lines start in ctrl-r mode
-source $ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-zstyle ':autocomplete:*' min-input 1
-zstyle ':autocomplete:*' default-context history-incremental-search-backward
-# Tab: force a fresh normal completion, ignoring the history-search context/listing
-.autocomplete-tab__completion-widget() {
-  unset curcontext
-  local +h curcontext=complete-word:::
-  local +h -a comppostfuncs=( .autocomplete__complete-word__post "$comppostfuncs[@]" )
-  compstate[old_list]=
-  autocomplete:_main_complete:new
-  [[ $_lastcomp[nmatches] -gt 0 && -n $compstate[insert] ]]
-}
-zle -C autocomplete-tab menu-select .autocomplete-tab__completion-widget
-bindkey '^I' autocomplete-tab
-# Left/right exit the menu and move the cursor instead of changing selection
-bindkey -M menuselect '^[[D' .backward-char '^[OD' .backward-char '^[[C' .forward-char '^[OC' .forward-char
-# Don't append ';' (multi-select) when accepting a history line
-zstyle ':autocomplete:*' add-semicolon no
-
 # Autocomplete setup
 zstyle ':completion::complete:*' gain-privileges 1
+zstyle ':completion:*' matcher-list 'm:{a-z}={A_Za-Z}'
 # No dircolors on Alpine, so define LS_COLORS by hand
 export LS_COLORS='di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:or=1;31:mi=2;37:su=37;41:sg=30;43:tw=30;42:ow=1;34:st=37;44'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" 'ma=30;42'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
 zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':completion:*:descriptions' format $'%{\e[1;33m%}[%d]%{\e[0m%}'
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+zstyle ':fzf-tab:*' switch-group '<' '>'
 
 #Include completions from user dir + zsh-completions package
 fpath=(~/.config/zsh/site-functions /usr/share/zsh/plugins/zsh-completions/src $fpath)
@@ -75,8 +60,9 @@ zstyle ':completion:*:*:make:*' tag-order 'targets'
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.opencode/bin:$PATH
 
-# compinit is run by zsh-autocomplete
-autoload -Uz bashcompinit select-word-style
+autoload -Uz compinit promptinit bashcompinit select-word-style
+compinit
+promptinit
 bashcompinit
 # Breaks word at slashes
 select-word-style bash
@@ -85,16 +71,20 @@ select-word-style bash
 bindkey '^[[1;5C' forward-word     # Ctrl+right arrow
 bindkey '^[[1;5D' backward-word    # Ctrl+left arrow
 
-# Arrow keys: zsh-autocomplete uses up for history menu, down for listing
-
 # Bind Ctrl+f to fg command
 function _fg() { echo "fg"; fg; zle reset-prompt; zle redisplay}
 zle -N _fg
 bindkey '^f' _fg
 
+source $ZDOTDIR/plugins/fzf-tab/fzf-tab.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# Without this autosuggestions rebinds widgets every prompt and ends up
+# wrapping (and blanking) the reverse search list below
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(autocomplete-tab)
+# Live reverse search list while typing, down/up arrows select from it.
+# Must come after autosuggestions, it chains onto its widgets.
+source $ZDOTDIR/plugins/auto-reverse-search.zsh
 source $ZDOTDIR/plugins/dirhistory.plugin.zsh
 
 # fzf integration
@@ -129,9 +119,31 @@ claude-pro() {
 alias g='git'
 alias k='kubectl'
 alias cat='bat'
+alias svi='sudo -E vi'
 alias kssh='kitten ssh'
 alias ls='eza'
 alias la='eza -la --octal-permissions'
+
+# git worktree
+gwt() {
+  # Usage: gwt <branch> [base]
+  #   gwt feat-foo              -> new branch feat-foo from HEAD
+  #   gwt feat-foo origin/master -> new branch from given base
+  local branch="$1"
+  local base="${2:-HEAD}"
+  if [[ -z "$branch" ]]; then
+    echo "usage: gwt <branch> [base]" >&2
+    return 1
+  fi
+  # Resolve repo root and derive sibling worktree path
+  local root
+  root=$(git rev-parse --show-toplevel) || return 1
+  local repo_name=${root:t}                  # basename
+  local parent=${root:h}                     # dirname
+  local wt_path="$parent/${repo_name}-${branch//\//-}"
+  git worktree add -b "$branch" "$wt_path" "$base" || return 1
+  cd "$wt_path"
+}
 
 # Google Cloud SDK
 export CLOUDSDK_PYTHON=/usr/bin/python3  # pin musl-safe python (bundled glibc python breaks on Alpine)
